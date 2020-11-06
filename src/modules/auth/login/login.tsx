@@ -1,19 +1,12 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-} from '@chakra-ui/core'
+import { Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/core'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout } from '../components'
 import { useLoginMutation } from '../graphql/login/login.generated'
 
 type Inputs = {
-  email: string,
-  password: string,
+  email: string
+  password: string
 }
 
 export const Login = () => {
@@ -21,7 +14,11 @@ export const Login = () => {
   const [login] = useLoginMutation()
 
   const onSubmit = async (inputData) => {
-    const { data: { login: { token } } } = await login({variables: inputData })
+    const {
+      data: {
+        login: { token },
+      },
+    } = await login({ variables: inputData })
     console.log(token)
   }
 
@@ -34,17 +31,13 @@ export const Login = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4}>
-            <FormLabel htmlFor="email">
-              E-mail address
-            </FormLabel>
+            <FormLabel htmlFor="email">E-mail address</FormLabel>
             <Input name="email" type="email" ref={register} placeholder="john.doe@example.org" />
             {errors.email && <span>This field is required</span>}
           </FormControl>
 
           <FormControl mb={4}>
-            <FormLabel htmlFor="password">
-                Password
-            </FormLabel>
+            <FormLabel htmlFor="password">Password</FormLabel>
             <Input name="password" type="password" ref={register} placeholder="*******" />
             {errors.password && <span>This field is required</span>}
           </FormControl>
