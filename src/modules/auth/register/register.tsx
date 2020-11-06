@@ -10,9 +10,11 @@ import {
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/router'
 import { Layout } from '../components'
 import { useRegisterMutation } from '../graphql/register/register.generated'
 import { registerSchema } from './register.validation'
+import { useAuthToken } from '../hooks/use_auth_token'
 
 type Inputs = {
   name: string
@@ -26,6 +28,8 @@ export const Register = () => {
     resolver: yupResolver(registerSchema),
   })
   const [registerMutation] = useRegisterMutation()
+  const { setAuthToken } = useAuthToken()
+  const router = useRouter()
 
   const onSubmit = async (inputData) => {
     const {
@@ -33,7 +37,8 @@ export const Register = () => {
         register: { token },
       },
     } = await registerMutation({ variables: inputData })
-    console.log(token)
+    setAuthToken(token)
+    router.push('/')
   }
 
   return (

@@ -1,9 +1,10 @@
-import { Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/core'
+import { Button, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/core'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
 import { Layout } from '../components'
 import { useLoginMutation } from '../graphql/login/login.generated'
-import { useToast } from '@chakra-ui/core'
+import { useAuthToken } from '../hooks/use_auth_token'
 
 type Inputs = {
   email: string
@@ -12,8 +13,10 @@ type Inputs = {
 
 export const Login = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>()
-  const [login, { loading, error }] = useLoginMutation()
+  const [login, { loading }] = useLoginMutation()
   const toast = useToast()
+  const { setAuthToken } = useAuthToken()
+  const router = useRouter()
 
   const onSubmit = async (inputData) => {
     try {
@@ -22,7 +25,8 @@ export const Login = () => {
           login: { token },
         },
       } = await login({ variables: inputData })
-      console.log(token)
+      setAuthToken(token)
+      router.push('/')
     } catch (error) {
       toast({
         title: error.message,
