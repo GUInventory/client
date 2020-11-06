@@ -3,6 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout } from '../components'
 import { useLoginMutation } from '../graphql/login/login.generated'
+import { useToast } from '@chakra-ui/core'
 
 type Inputs = {
   email: string
@@ -11,15 +12,25 @@ type Inputs = {
 
 export const Login = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>()
-  const [login] = useLoginMutation()
+  const [login, { loading, error }] = useLoginMutation()
+  const toast = useToast()
 
   const onSubmit = async (inputData) => {
-    const {
-      data: {
-        login: { token },
-      },
-    } = await login({ variables: inputData })
-    console.log(token)
+    try {
+      const {
+        data: {
+          login: { token },
+        },
+      } = await login({ variables: inputData })
+      console.log(token)
+    } catch (error) {
+      toast({
+        title: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
   }
 
   return (
@@ -42,7 +53,7 @@ export const Login = () => {
             {errors.password && <span>This field is required</span>}
           </FormControl>
 
-          <Button variantColor="blue" type="submit">
+          <Button variantColor="blue" type="submit" isLoading={loading}>
             Login
           </Button>
         </form>
