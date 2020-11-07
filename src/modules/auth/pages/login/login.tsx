@@ -1,10 +1,10 @@
-import { Button, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/core'
+import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/core'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { Layout, Card } from '../components'
-import { useLoginMutation } from '../graphql/login/login.generated'
-import { useAuthToken } from '../hooks/use_auth_token'
+import { Layout, Card } from '../../components'
+import { useLoginMutation } from '../../graphql/login/login.generated'
+import { useAuthToken } from '../../hooks/use_auth_token'
 
 type Inputs = {
   email: string

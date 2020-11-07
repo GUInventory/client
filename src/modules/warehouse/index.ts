@@ -1,2 +1,3 @@
-export * from './warehouse/warehouses'
-export * from './warehouse/warehouse'
+export * from './pages/warehouse/warehouses'
+export * from './pages/warehouse/warehouse'
+export * from './pages/storage/storage'
