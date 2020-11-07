@@ -1,7 +1,7 @@
-import { Box, Heading } from '@chakra-ui/core'
 import React from 'react'
+import { Heading, Text, Flex, Box } from '@chakra-ui/core'
 import { useRouter } from 'next/router'
-import { Layout } from '../../components'
+import { Layout, ItemList, ItemContainer } from '../../components'
 import { useStorageQuery } from '../../graphql/storage/find.generated'
 import { LoadingScreen, Breadcrumb } from '@modules/core/components'
 
@@ -32,9 +32,24 @@ export const Storage = () => {
         ]}
       />
       <Heading>{data.storage.name}</Heading>
-      {data.storage.items.map((item) => (
-        <Box>{item.name}</Box>
-      ))}
+      <Text color="gray.400" fontSize="sm">
+        Size: {`${data.storage.size.x}x${data.storage.size.y}x${data.storage.size.z}`}
+      </Text>
+      <Flex flexDirection="row">
+        <Box flex={1}>
+          <Heading size="md" mb={2}>
+            Storage
+          </Heading>
+          <ItemContainer items={data.storage.items} />
+        </Box>
+
+        <Box flex={1}>
+          <Heading size="md" mb={2}>
+            List of Items
+          </Heading>
+          <ItemList items={data.storage.items} />
+        </Box>
+      </Flex>
     </Layout>
   )
 }

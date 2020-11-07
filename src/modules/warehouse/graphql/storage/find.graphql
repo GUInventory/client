@@ -2,9 +2,16 @@ query Storage($id: Int!) {
   storage(id: $id) {
     id
     name
+    size {
+      x
+      y
+      z
+    }
     items {
       id
       name
+      image
+      value
     }
     warehouse {
       id
