@@ -19,9 +19,12 @@ const httpLink = createHttpLink({
   credentials: 'same-origin',
 })
 
-const errorLink = onError((error) => {
-  // TODO: Remove token and redirect if error code eq 401
-  console.error(error)
+const errorLink = onError(({ graphQLErrors }) => {
+  const error = graphQLErrors
+  if (error?.code === 401) {
+    localStorage.removeItem('TOKEN')
+    alert('logout')
+  }
 })
 
 // use with apollo-client

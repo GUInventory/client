@@ -1,0 +1,6 @@
+query ListWarehouses {
+  warehouses {
+    id
+    name
+  }
+}

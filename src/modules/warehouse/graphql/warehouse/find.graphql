@@ -1,0 +1,6 @@
+query Warehouse($id: Int!) {
+  warehouse(id: $id) {
+    id
+    name
+  }
+}
