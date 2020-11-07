@@ -1,0 +1,10 @@
+query Storage($id: Int!) {
+  storage(id: $id) {
+    id
+    name
+    items {
+      id
+      name
+    }
+  }
+}

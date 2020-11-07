@@ -1,4 +1,4 @@
-import { Box, Spinner, Link } from '@chakra-ui/core'
+import { Box, Spinner, Link, Heading } from '@chakra-ui/core'
 import React from 'react'
 import NextLink from 'next/link'
 import { useListWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
@@ -16,6 +16,7 @@ export const Warehouses = () => {
 
   return (
     <Layout>
+      <Heading>Warehouses</Heading>
       {data.warehouses.map((warehouse) => (
         <Box borderWidth="1px" rounded="lg" p={4} my={2}>
           {warehouse.name}
