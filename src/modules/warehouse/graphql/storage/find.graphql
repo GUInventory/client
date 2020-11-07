@@ -6,5 +6,9 @@ query Storage($id: Int!) {
       id
       name
     }
+    warehouse {
+      id
+      name
+    }
   }
 }

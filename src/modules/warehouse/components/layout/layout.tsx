@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Box,
-  Button,
   Flex,
   Link,
   Spinner,
@@ -18,8 +17,19 @@ export const Layout = ({ children }) => {
   const { data, loading, error } = useListWarehousesQuery()
   return (
     <>
-      <Flex justifyContent="space-between" p={4} borderBottom="1px" borderColor="gray.200">
-        <Box fontWeight="bold">GUINVENTORY</Box>
+      <Flex
+        justifyContent="space-between"
+        p={4}
+        borderBottom="1px"
+        borderColor="gray.200"
+        h="100%"
+        w="100%"
+      >
+        <Box fontWeight="bold">
+          <NextLink href="/">
+            <Link m={4}>GUINVENTORY</Link>
+          </NextLink>
+        </Box>
         <Box>
           {loading && <Spinner />}
           {data && (
@@ -40,7 +50,7 @@ export const Layout = ({ children }) => {
           )}
         </Box>
       </Flex>
-      <Box w="100%" maxW={1200} mt={8} mx="auto">
+      <Box w="100%" h="100%" maxW={1200} mt={8} mx="auto">
         {children}
       </Box>
     </>

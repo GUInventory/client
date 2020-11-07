@@ -21,6 +21,7 @@ const httpLink = createHttpLink({
 
 const errorLink = onError(({ graphQLErrors }) => {
   const error = graphQLErrors
+  // TODO: It's not an implementation..
   if (error?.code === 401) {
     localStorage.removeItem('TOKEN')
     alert('logout')

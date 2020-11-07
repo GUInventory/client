@@ -1,20 +1,12 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  FormErrorMessage,
-} from '@chakra-ui/core'
+import { Button, FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/core'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
-import { Layout, Card } from '../components'
-import { useRegisterMutation } from '../graphql/register/register.generated'
+import { Layout, Card } from '../../components'
+import { useRegisterMutation } from '../../graphql/register/register.generated'
 import { registerSchema } from './register.validation'
-import { useAuthToken } from '../hooks/use_auth_token'
+import { useAuthToken } from '../../hooks/use_auth_token'
 
 type Inputs = {
   name: string
