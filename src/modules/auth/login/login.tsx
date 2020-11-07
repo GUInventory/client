@@ -2,7 +2,7 @@ import { Button, Flex, FormControl, FormLabel, Heading, Input, useToast } from '
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { Layout } from '../components'
+import { Layout, Card } from '../components'
 import { useLoginMutation } from '../graphql/login/login.generated'
 import { useAuthToken } from '../hooks/use_auth_token'
 
@@ -39,11 +39,7 @@ export const Login = () => {
 
   return (
     <Layout>
-      <Flex direction="column">
-        <Heading fontSize="lg" textAlign="center">
-          Login
-        </Heading>
-
+      <Card title="Login">
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4}>
             <FormLabel htmlFor="email">E-mail address</FormLabel>
@@ -59,7 +55,7 @@ export const Login = () => {
             Login
           </Button>
         </form>
-      </Flex>
+      </Card>
     </Layout>
   )
 }

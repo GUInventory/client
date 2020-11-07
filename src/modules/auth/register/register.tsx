@@ -11,7 +11,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
-import { Layout } from '../components'
+import { Layout, Card } from '../components'
 import { useRegisterMutation } from '../graphql/register/register.generated'
 import { registerSchema } from './register.validation'
 import { useAuthToken } from '../hooks/use_auth_token'
@@ -43,11 +43,7 @@ export const Register = () => {
 
   return (
     <Layout>
-      <Flex direction="column">
-        <Heading fontSize="lg" textAlign="center">
-          Register
-        </Heading>
-
+      <Card title="Register">
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4} isInvalid={!!errors.name}>
             <FormLabel htmlFor="email">Name</FormLabel>
@@ -82,7 +78,7 @@ export const Register = () => {
             Register
           </Button>
         </form>
-      </Flex>
+      </Card>
     </Layout>
   )
 }

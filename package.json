@@ -24,6 +24,8 @@
     "@graphql-codegen/typescript-react-apollo": "^2.0.7",
     "@hookform/resolvers": "^1.0.0",
     "add": "^2.0.6",
+    "apollo-link-error": "^1.1.13",
+    "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "graphql": "^15.4.0",
