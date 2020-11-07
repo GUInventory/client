@@ -37,3 +37,5 @@ yarn-error.log*
 src/**/*.generated.ts
 src/generated/
 graphql.schema.json
+
+.env

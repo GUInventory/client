@@ -3,9 +3,10 @@ import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client'
 import { AppProps } from 'next/app'
+import { GRAPHQL_ENDPOINT } from 'config/environment'
 
 const client = new ApolloClient({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: GRAPHQL_ENDPOINT,
   cache: new InMemoryCache(),
 })
 
