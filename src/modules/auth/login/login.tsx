@@ -48,13 +48,11 @@ export const Login = () => {
           <FormControl mb={4}>
             <FormLabel htmlFor="email">E-mail address</FormLabel>
             <Input name="email" type="email" ref={register} placeholder="john.doe@example.org" />
-            {errors.email && <span>This field is required</span>}
           </FormControl>
 
           <FormControl mb={4}>
             <FormLabel htmlFor="password">Password</FormLabel>
             <Input name="password" type="password" ref={register} placeholder="*******" />
-            {errors.password && <span>This field is required</span>}
           </FormControl>
 
           <Button variantColor="blue" type="submit" isLoading={loading}>
