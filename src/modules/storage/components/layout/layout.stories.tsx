@@ -3,7 +3,7 @@ import { Layout } from './layout'
 import { Box, Text } from '@chakra-ui/core'
 
 export default {
-  title: 'Warehouse/Layout',
+  title: 'Auth/Layout',
 }
 
 export const layout = () => (
