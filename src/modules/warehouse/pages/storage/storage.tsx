@@ -16,13 +16,21 @@ export const Storage = () => {
     return <LoadingScreen />
   }
 
+  const items = data.storage.items.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      image: item.image,
+      value: item.value,
+    }
+  })
   return (
     <Layout>
       <Breadcrumb
         data={[
           {
-            href: `/warehouse/${data.storage.warehouse.id}`,
-            title: data.storage.warehouse.name,
+            href: `/warehouse/${data.storage.warehouse[0].id}`,
+            title: data.storage.warehouse[0].name,
           },
           {
             href: '#',
@@ -40,14 +48,14 @@ export const Storage = () => {
           <Heading size="md" mb={2}>
             Storage
           </Heading>
-          <ItemContainer items={data.storage.items} />
+          <ItemContainer items={items} />
         </Box>
 
         <Box flex={1}>
           <Heading size="md" mb={2}>
             List of Items
           </Heading>
-          <ItemList items={data.storage.items} />
+          <ItemList items={items} />
         </Box>
       </Flex>
     </Layout>

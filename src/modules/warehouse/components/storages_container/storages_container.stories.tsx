@@ -1,6 +1,5 @@
 import React from 'react'
 import { StoragesContainer } from './storages_container'
-import { Box, Text } from '@chakra-ui/core'
 
 export default {
   title: 'Warehouse/StoragesContainer',
@@ -8,15 +7,15 @@ export default {
 
 const data = [
   {
-    id: 1,
+    id: '1',
     name: 'Storage A',
   },
   {
-    id: 2,
+    id: '2',
     name: 'Storage B',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Storage C',
   },
 ]

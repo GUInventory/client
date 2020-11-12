@@ -38,7 +38,14 @@ export const Warehouse = () => {
             <Heading size="md" mb={2}>
               Map of Warehouse
             </Heading>
-            <StoragesContainer storages={data.warehouse.storages} />
+            <StoragesContainer
+              storages={data.warehouse.storages.map((storage) => {
+                return {
+                  id: storage.id,
+                  name: storage.name,
+                }
+              })}
+            />
           </Box>
           <Box flex={1}>
             <Heading size="md" mb={2}>

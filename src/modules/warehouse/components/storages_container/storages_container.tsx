@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/core'
 import NextLink from 'next/link'
 
-type StoragesContainerProps = { storages: { id: number; name: string }[] }
+type StoragesContainerProps = { storages: { id: string; name: string }[] }
 
 export const StoragesContainer = ({ storages }: StoragesContainerProps) => (
   <Flex mb={3}>
