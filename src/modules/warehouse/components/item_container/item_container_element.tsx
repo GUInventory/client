@@ -12,7 +12,7 @@ import {
 import NextLink from 'next/link'
 
 export type ItemContainerElementProps = {
-  id: number
+  id: string
   name: String
   image: String
   value: number
