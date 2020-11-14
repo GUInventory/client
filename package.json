@@ -16,7 +16,7 @@
     "@chakra-ui/icons": "^1.0.0",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/styled": "^11.0.0",
     "@graphql-codegen/cli": "^1.19.0",
     "@graphql-codegen/introspection": "^1.18.0",
     "@graphql-codegen/near-operation-file-preset": "^1.17.11",
