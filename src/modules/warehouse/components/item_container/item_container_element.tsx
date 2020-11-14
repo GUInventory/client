@@ -3,7 +3,7 @@ import {
   Box,
   Flex,
   Link,
-  PseudoBox,
+  Box,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -22,13 +22,9 @@ export const ItemContainerElement = ({ id, name, image, value }) => (
     <Link p={1}>
       <Popover trigger="hover">
         <PopoverTrigger>
-          <PseudoBox
-            rounded="lg"
-            backgroundColor="orange.400"
-            _hover={{ backgroundColor: 'orange.300' }}
-          >
+          <Box rounded="lg" backgroundColor="orange.400" _hover={{ backgroundColor: 'orange.300' }}>
             <Box w="48px" h="48px"></Box>
-          </PseudoBox>
+          </Box>
         </PopoverTrigger>
 
         <PopoverContent

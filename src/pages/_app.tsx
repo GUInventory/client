@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import { ChakraProvider, CSSReset } from '@chakra-ui/core'
 import { ApolloProvider } from '@apollo/client'
 import { AppProps } from 'next/app'
 import { useApollo } from '@lib/apollo_client'
@@ -9,10 +9,10 @@ function App({ Component, pageProps }: AppProps): React.ReactNode {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider>
+      <ChakraProvider>
         <CSSReset />
         <Component {...pageProps} />
-      </ThemeProvider>
+      </ChakraProvider>
     </ApolloProvider>
   )
 }

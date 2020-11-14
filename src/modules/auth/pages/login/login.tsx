@@ -51,7 +51,7 @@ export const Login = () => {
             <Input name="password" type="password" ref={register} placeholder="*******" />
           </FormControl>
 
-          <Button variantColor="blue" type="submit" isLoading={loading}>
+          <Button colorScheme="blue" type="submit" isLoading={loading}>
             Login
           </Button>
         </form>

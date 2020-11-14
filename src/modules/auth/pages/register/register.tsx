@@ -66,7 +66,7 @@ export const Register = () => {
             <FormErrorMessage>{errors.passwordConfirmation?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button variantColor="blue" type="submit">
+          <Button colorScheme="blue" type="submit">
             Register
           </Button>
         </form>

@@ -1,15 +1,6 @@
 import React from 'react'
-import {
-  Box,
-  Flex,
-  Link,
-  Spinner,
-  Menu,
-  MenuList,
-  MenuItem,
-  MenuButton,
-  Icon,
-} from '@chakra-ui/core'
+import { Box, Flex, Link, Spinner, Menu, MenuList, MenuItem, MenuButton } from '@chakra-ui/core'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useListWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
 
@@ -35,7 +26,7 @@ export const Layout = ({ children }) => {
           {data && (
             <Menu>
               <MenuButton>
-                Warehouses <Icon name="chevron-down" />
+                Warehouses <ChevronDownIcon />
               </MenuButton>
               <MenuList>
                 {data.warehouses.map((warehouse) => (
