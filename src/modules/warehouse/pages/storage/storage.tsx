@@ -7,13 +7,15 @@ import { LoadingScreen, Breadcrumb } from '@modules/core/components'
 
 export const Storage = () => {
   const router = useRouter()
-  const { data, loading, error } = useStorageQuery({ variables: { id: +router.query.id } })
+  const { id } = router.query
+  const { data, loading, error } = useStorageQuery({ variables: { id: +id } })
+
+  if (loading || !id) {
+    return <LoadingScreen />
+  }
 
   if (error) {
     return <>Error</>
-  }
-  if (loading) {
-    return <LoadingScreen />
   }
 
   const items = data.storage.items.map((item) => {
@@ -29,8 +31,8 @@ export const Storage = () => {
       <Breadcrumb
         data={[
           {
-            href: `/warehouse/${data.storage.warehouse[0].id}`,
-            title: data.storage.warehouse[0].name,
+            href: `/warehouse/${data.storage.warehouse.id}`,
+            title: data.storage.warehouse.name,
           },
           {
             href: '#',
