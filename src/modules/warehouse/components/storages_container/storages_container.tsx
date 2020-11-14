@@ -1,14 +1,5 @@
 import React from 'react'
-import {
-  Box,
-  Flex,
-  Link,
-  Box,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Flex, Link, Popover, PopoverTrigger, PopoverContent, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 type StoragesContainerProps = { storages: { id: string; name: string }[] }
