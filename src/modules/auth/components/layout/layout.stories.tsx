@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout } from './layout'
-import { Box, Text } from '@chakra-ui/core'
+import { Box, Text } from '@chakra-ui/react'
 
 export default {
   title: 'Auth/Layout',

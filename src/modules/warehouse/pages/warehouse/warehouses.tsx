@@ -1,4 +1,4 @@
-import { Box, Link, Heading } from '@chakra-ui/core'
+import { Box, Link, Heading } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from 'next/link'
 import { useListWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'

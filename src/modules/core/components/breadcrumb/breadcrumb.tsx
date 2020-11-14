@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/core'
+import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 type BreadcrumbProps = {

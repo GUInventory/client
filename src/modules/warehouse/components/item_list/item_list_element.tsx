@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text, Image } from '@chakra-ui/core'
+import { Flex, Text, Image } from '@chakra-ui/react'
 
 export type ItemListElementProps = {
   name: String

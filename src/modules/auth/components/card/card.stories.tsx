@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from './card'
-import { Box, Text } from '@chakra-ui/core'
+import { Box, Text } from '@chakra-ui/react'
 
 export default {
   title: 'Auth/Card',

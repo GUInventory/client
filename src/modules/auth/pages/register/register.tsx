@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/core'
+import { Button, FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -66,7 +66,7 @@ export const Register = () => {
             <FormErrorMessage>{errors.passwordConfirmation?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button variantColor="blue" type="submit">
+          <Button colorScheme="blue" type="submit">
             Register
           </Button>
         </form>

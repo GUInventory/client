@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/core'
+import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -51,7 +51,7 @@ export const Login = () => {
             <Input name="password" type="password" ref={register} placeholder="*******" />
           </FormControl>
 
-          <Button variantColor="blue" type="submit" isLoading={loading}>
+          <Button colorScheme="blue" type="submit" isLoading={loading}>
             Login
           </Button>
         </form>

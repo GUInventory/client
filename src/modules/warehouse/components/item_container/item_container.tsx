@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/react'
 import { ItemContainerElementProps, ItemContainerElement } from './item_container_element'
 
 type ItemContainerProps = { items: ItemContainerElementProps[] }
