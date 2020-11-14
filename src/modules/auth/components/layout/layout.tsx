@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link } from '@chakra-ui/core'
+import { Box, Flex, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 export const Layout = ({ children }) => (

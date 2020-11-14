@@ -1,6 +1,6 @@
-import { ThemeProvider, CSSReset } from "@chakra-ui/core"
-import { addDecorator, configure } from "@storybook/react"
-import React from "react"
+import { ThemeProvider, CSSReset } from '@chakra-ui/react'
+import { addDecorator, configure } from '@storybook/react'
+import React from 'react'
 
 addDecorator((story) => (
   <ThemeProvider>
@@ -9,4 +9,4 @@ addDecorator((story) => (
   </ThemeProvider>
 ))
 
-configure(require.context("../src/", true, /\.stories\.tsx$/), module)
+configure(require.context('../src/', true, /\.stories\.tsx$/), module)

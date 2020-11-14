@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   Text,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 type StoragesContainerProps = { storages: { id: string; name: string }[] }

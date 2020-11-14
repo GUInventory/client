@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/core'
+import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, Spinner, Menu, MenuList, MenuItem, MenuButton } from '@chakra-ui/core'
+import { Box, Flex, Link, Spinner, Menu, MenuList, MenuItem, MenuButton } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useListWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'

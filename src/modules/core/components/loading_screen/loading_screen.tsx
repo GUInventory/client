@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Spinner } from '@chakra-ui/core'
+import { Flex, Spinner } from '@chakra-ui/react'
 
 export const LoadingScreen = () => (
   <Flex w="100%" h="100%" justify="center" align="center">
