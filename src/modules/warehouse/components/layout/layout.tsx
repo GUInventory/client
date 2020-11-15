@@ -2,10 +2,10 @@ import React from 'react'
 import { Box, Flex, Link, Spinner, Menu, MenuList, MenuItem, MenuButton } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { useListWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
+import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
 
 export const Layout = ({ children }) => {
-  const { data, loading, error } = useListWarehousesQuery()
+  const { data, loading, error } = useListMyWarehousesQuery()
   return (
     <>
       <Flex
@@ -29,7 +29,7 @@ export const Layout = ({ children }) => {
                 Warehouses <ChevronDownIcon />
               </MenuButton>
               <MenuList>
-                {data.warehouses.map((warehouse) => (
+                {data.myWarehouses.map((warehouse) => (
                   <MenuItem>
                     <NextLink href={`/warehouse/${warehouse.id}`}>
                       <Link m={4}>{warehouse.name}</Link>

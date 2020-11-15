@@ -1,5 +1,5 @@
-query ListWarehouses {
-  warehouses {
+query ListMyWarehouses {
+  myWarehouses {
     id
     name
   }
