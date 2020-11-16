@@ -11,7 +11,7 @@ export const Warehouse = () => {
   const { data, loading, error } = useWarehouseQuery({ variables: { id: +router.query.id } })
 
   if (error) {
-    return <>Error</>
+    return <ErrorPage />
   }
   if (loading) {
     return <LoadingScreen />

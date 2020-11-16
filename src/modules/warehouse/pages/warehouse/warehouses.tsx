@@ -3,13 +3,13 @@ import React from 'react'
 import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
 import { Layout } from '../../components'
-import { LoadingScreen, Breadcrumb } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 
 export const Warehouses = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
 
   if (error) {
-    return <>Error</>
+    return <ErrorPage />
   }
   if (loading) {
     return <LoadingScreen />
