@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { useWarehouseQuery } from '@modules/warehouse/graphql/warehouse/find.generated'
 import { Layout, StoragesContainer, EmptyState } from '../../components'
-import { LoadingScreen, Breadcrumb } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 
 export const Warehouse = () => {
   const router = useRouter()
