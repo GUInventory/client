@@ -1,7 +1,9 @@
-import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout, Breadcrumb } from '@modules/core/components'
+import { useCreateCategoryMutation } from '../graphql/create.generated'
+import { useRouter } from 'next/router'
 
 type Inputs = {
   name: string
@@ -10,11 +12,17 @@ type Inputs = {
 
 export const NewCategory = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>()
-  const toast = useToast()
+  const router = useRouter()
+  const [createCategoryMutation] = useCreateCategoryMutation()
 
   const onSubmit = async (inputData) => {
-    alert('submit')
-    console.table(inputData)
+    const {
+      data: {
+        createCategory: { id },
+      },
+    } = await createCategoryMutation({ variables: inputData })
+
+    router.push(`/category/${id}`)
   }
 
   return (
@@ -34,8 +42,8 @@ export const NewCategory = () => {
       />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
-          <FormLabel htmlFor="title">Title</FormLabel>
-          <Input name="title" type="text" ref={register} />
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input name="name" type="text" ref={register} />
         </FormControl>
 
         <FormControl mb={4}>
