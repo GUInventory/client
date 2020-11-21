@@ -13,7 +13,7 @@ type Inputs = {
 export const NewCategory = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>()
   const router = useRouter()
-  const [createCategoryMutation] = useCreateCategoryMutation()
+  const [createCategoryMutation, { loading }] = useCreateCategoryMutation()
 
   const onSubmit = async (inputData) => {
     const {
@@ -51,7 +51,7 @@ export const NewCategory = () => {
           <Input name="color" type="color" ref={register} />
         </FormControl>
 
-        <Button colorScheme="blue" type="submit">
+        <Button colorScheme="blue" type="submit" isLoading={loading}>
           Create
         </Button>
       </form>
