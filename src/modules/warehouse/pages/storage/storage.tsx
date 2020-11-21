@@ -1,9 +1,9 @@
 import React from 'react'
 import { Heading, Text, Flex, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Layout, ItemList, ItemContainer } from '../../components'
+import { ItemList, ItemContainer } from '../../components'
 import { useStorageQuery } from '../../graphql/storage/find.generated'
-import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 
 export const Storage = () => {
   const router = useRouter()
