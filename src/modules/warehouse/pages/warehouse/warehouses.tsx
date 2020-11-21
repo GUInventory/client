@@ -16,7 +16,15 @@ export const Warehouses = () => {
 
   return (
     <Layout>
-      <Breadcrumb data={[]} />
+      <Breadcrumb
+        data={[
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'Warehouses',
+          },
+        ]}
+      />
       <Heading>Warehouses</Heading>
       {data.myWarehouses.map((warehouse) => (
         <Box borderWidth="1px" rounded="lg" p={4} my={2}>

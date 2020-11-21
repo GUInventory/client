@@ -44,7 +44,7 @@ export const Layout = ({ children }) => {
           )}
         </Box>
       </Flex>
-      <Box w="100%" h="100%" maxW={1200} mt={8} mx="auto">
+      <Box w="100%" h="100%" maxW={1200} mt={3} mx="auto" p={5}>
         {children}
       </Box>
     </>

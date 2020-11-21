@@ -17,7 +17,15 @@ export const Categories = () => {
 
   return (
     <Layout>
-      <Breadcrumb data={[]} />
+      <Breadcrumb
+        data={[
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'Categories',
+          },
+        ]}
+      />
       <Flex justifyContent="space-between">
         <Heading>Categories</Heading>
 

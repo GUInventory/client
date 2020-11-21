@@ -1,8 +1,7 @@
 import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { Layout, Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -20,6 +19,19 @@ export const NewCategory = () => {
 
   return (
     <Layout>
+      <Breadcrumb
+        data={[
+          {
+            href: '/category',
+            title: 'Categories',
+          },
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'New category',
+          },
+        ]}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="title">Title</FormLabel>
