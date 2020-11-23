@@ -1,8 +1,9 @@
 import React from 'react'
-import { Box, Link, Text, Flex } from '@chakra-ui/react'
+import { Box, Link, Text, Flex, IconButton } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { DeleteIcon } from '@chakra-ui/icons'
 
-export const CategoryElement = ({ id, name, color, numberOfItems }) => (
+export const CategoryElement = ({ id, name, color, numberOfItems, onDeleteClick }) => (
   <Flex
     borderWidth="1px"
     rounded="lg"
@@ -16,13 +17,19 @@ export const CategoryElement = ({ id, name, color, numberOfItems }) => (
       <Text mt={2}>{name}</Text>
     </Flex>
     <Flex>
-      <Text mt={2} mx={3} color="gray.400">
+      <Text m={2} color="gray.400">
         {numberOfItems} items
       </Text>
 
       <NextLink href={`/category/${id}`}>
         <Link m={2}>Show</Link>
       </NextLink>
+      <IconButton
+        colorScheme="red"
+        aria-label="Delete"
+        icon={<DeleteIcon />}
+        onClick={onDeleteClick}
+      />
     </Flex>
   </Flex>
 )

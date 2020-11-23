@@ -4,15 +4,21 @@ import NextLink from 'next/link'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useListCategoriesQuery } from '../graphql/list.generated'
 import { CategoryElement } from '../components'
+import { useDeleteCategoryMutation } from '../graphql/delete.generated'
 
 export const Categories = () => {
   const { data, loading, error } = useListCategoriesQuery()
+  const [deleteCategoryMutation, deleteState] = useDeleteCategoryMutation()
 
   if (error) {
     return <ErrorPage />
   }
   if (loading) {
     return <LoadingScreen />
+  }
+
+  const onDeleteClick = async (id) => {
+    await deleteCategoryMutation({ variables: { id } })
   }
 
   return (
@@ -39,6 +45,7 @@ export const Categories = () => {
           name={category.name}
           color={category.color}
           numberOfItems={category.items?.length || 0}
+          onDeleteClick={() => onDeleteClick(+category.id)}
         />
       ))}
     </Layout>
