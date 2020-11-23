@@ -1,0 +1,10 @@
+query ListCategories {
+  categories {
+    id
+    name
+    color
+    items {
+      id
+    }
+  }
+}
