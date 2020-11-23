@@ -1,6 +1,7 @@
 import { Button, Flex, Heading, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useCategoryQuery } from '../graphql/find.generated'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
@@ -42,7 +43,9 @@ export const Category = () => {
         <Heading>{data.category.name}</Heading>
 
         <Box>
-          <Button colorScheme="blue">Edit</Button>
+          <NextLink href={`/category/${data.category.id}/edit`}>
+            <Button colorScheme="blue">Edit</Button>
+          </NextLink>
           <Button
             colorScheme="red"
             isLoading={deleteState.loading}

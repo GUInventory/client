@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box, Link, Text, Flex, IconButton } from '@chakra-ui/react'
+import { Box, Text, Flex, IconButton, ButtonGroup } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { DeleteIcon } from '@chakra-ui/icons'
+import { DeleteIcon, ViewIcon, EditIcon } from '@chakra-ui/icons'
 
 export const CategoryElement = ({ id, name, color, numberOfItems, onDeleteClick }) => (
   <Flex
@@ -21,15 +21,28 @@ export const CategoryElement = ({ id, name, color, numberOfItems, onDeleteClick 
         {numberOfItems} items
       </Text>
 
-      <NextLink href={`/category/${id}`}>
-        <Link m={2}>Show</Link>
-      </NextLink>
-      <IconButton
-        colorScheme="red"
-        aria-label="Delete"
-        icon={<DeleteIcon />}
-        onClick={onDeleteClick}
-      />
+      <ButtonGroup size="sm" isAttached mt={1}>
+        <NextLink href={`/category/${id}`}>
+          <IconButton
+            colorScheme="green"
+            aria-label="Show"
+            icon={<ViewIcon />}
+          /> 
+        </NextLink>
+        <NextLink href={`/category/${id}/edit`}>
+          <IconButton
+            colorScheme="blue"
+            aria-label="Edit"
+            icon={<EditIcon />}
+          />
+        </NextLink>
+        <IconButton
+          colorScheme="red"
+          aria-label="Delete"
+          icon={<DeleteIcon />}
+          onClick={onDeleteClick}
+        />
+      </ButtonGroup>
     </Flex>
   </Flex>
 )
