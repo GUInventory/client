@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button, Heading, Flex } from '@chakra-ui/react'
+import { Heading, Flex, IconButton } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useListCategoriesQuery } from '../graphql/list.generated'
 import { CategoryElement } from '../components'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
+import { AddIcon } from '@chakra-ui/icons'
 
 export const Categories = () => {
   const { data, loading, error } = useListCategoriesQuery()
@@ -36,7 +37,7 @@ export const Categories = () => {
         <Heading>Categories</Heading>
 
         <NextLink href="/category/new">
-          <Button colorScheme="blue">Add new category</Button>
+          <IconButton colorScheme="blue" aria-label="Add new category" icon={<AddIcon />} />
         </NextLink>
       </Flex>
       {data.categories.map((category) => (

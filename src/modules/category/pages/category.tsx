@@ -1,10 +1,11 @@
-import { Button, Flex, Heading, Box } from '@chakra-ui/react'
+import { Button, Flex, Heading, Box, IconButton, ButtonGroup } from '@chakra-ui/react'
 import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useCategoryQuery } from '../graphql/find.generated'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export const Category = () => {
   const router = useRouter()
@@ -43,16 +44,17 @@ export const Category = () => {
         <Heading>{data.category.name}</Heading>
 
         <Box>
-          <NextLink href={`/category/${data.category.id}/edit`}>
-            <Button colorScheme="blue">Edit</Button>
-          </NextLink>
-          <Button
-            colorScheme="red"
-            isLoading={deleteState.loading}
-            onClick={() => onDeleteClick(+data.category.id)}
-          >
-            Delete
-          </Button>
+          <ButtonGroup size="sm" isAttached mt={1}>
+            <NextLink href={`/category/${data.category.id}/edit`}>
+              <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+            </NextLink>
+            <IconButton
+              colorScheme="red"
+              aria-label="Delete"
+              icon={<DeleteIcon />}
+              onClick={onDeleteClick}
+            />
+          </ButtonGroup>
         </Box>
       </Flex>
     </Layout>
