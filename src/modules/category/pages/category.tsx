@@ -6,6 +6,7 @@ import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/comp
 import { useCategoryQuery } from '../graphql/find.generated'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import { ListCategoriesDocument } from '../graphql/list.generated'
 
 export const Category = () => {
   const router = useRouter()
@@ -20,7 +21,10 @@ export const Category = () => {
   }
 
   const onDeleteClick = async (id) => {
-    await deleteCategoryMutation({ variables: { id } })
+    await deleteCategoryMutation({
+      variables: { id },
+      refetchQueries: [{ query: ListCategoriesDocument }],
+    })
 
     router.push('/category')
   }

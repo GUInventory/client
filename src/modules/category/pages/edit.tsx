@@ -5,6 +5,7 @@ import { Layout, Breadcrumb } from '@modules/core/components'
 import { useRouter } from 'next/router'
 import { useUpdateCategoryMutation } from '../graphql/update.generated'
 import { useCategoryQuery } from '../graphql/find.generated'
+import { ListCategoriesDocument } from '../graphql/list.generated'
 
 type Inputs = {
   name: string
@@ -35,6 +36,7 @@ export const EditCategory = () => {
         id: +router.query.id,
         ...inputData,
       },
+      refetchQueries: [{ query: ListCategoriesDocument }],
     })
 
     router.push(`/category/${id}`)
