@@ -2,11 +2,16 @@ query Item($id: Int!) {
   item(id: $id) {
     id
     name
+    image
     size {
       x
       y
       z
     }
-    image
+    logs {
+      userId
+      type
+      createdAt
+    }
   }
 }
