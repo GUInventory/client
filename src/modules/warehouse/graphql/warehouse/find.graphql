@@ -2,6 +2,11 @@ query Warehouse($id: Int!) {
   warehouse(id: $id) {
     id
     name
+    size {
+      x
+      y
+      z
+    }
     storages {
       id
       name

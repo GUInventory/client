@@ -1,17 +1,30 @@
-import { Box, Link, Heading } from '@chakra-ui/react'
+import { Heading, IconButton, Flex, ButtonGroup } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from 'next/link'
-import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
+import {
+  useListMyWarehousesQuery,
+  ListMyWarehousesDocument,
+} from '@modules/warehouse/graphql/warehouse/list.generated'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { AddIcon, ViewIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import { useDeleteWarehouseMutation } from '@modules/warehouse/graphql/warehouse/delete.generated'
 
 export const Warehouses = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
+  const [deleteWarehouseMutation, deleteState] = useDeleteWarehouseMutation()
 
   if (error) {
     return <ErrorPage />
   }
   if (loading) {
     return <LoadingScreen />
+  }
+
+  const onDeleteClick = async (id) => {
+    await deleteWarehouseMutation({
+      variables: { id },
+      refetchQueries: [{ query: ListMyWarehousesDocument }],
+    })
   }
 
   return (
@@ -25,14 +38,32 @@ export const Warehouses = () => {
           },
         ]}
       />
-      <Heading>Warehouses</Heading>
+      <Flex justifyContent="space-between">
+        <Heading>Warehouses</Heading>
+
+        <NextLink href="/warehouse/new">
+          <IconButton colorScheme="blue" aria-label="Add new warehouse" icon={<AddIcon />} />
+        </NextLink>
+      </Flex>
       {data.myWarehouses.map((warehouse) => (
-        <Box borderWidth="1px" rounded="lg" p={4} my={2}>
+        <Flex justify="space-between" borderWidth="1px" rounded="lg" p={4} my={2}>
           {warehouse.name}
-          <NextLink href={`/warehouse/${warehouse.id}`}>
-            <Link m={4}>Show</Link>
-          </NextLink>
-        </Box>
+
+          <ButtonGroup size="sm" isAttached mt={1}>
+            <NextLink href={`/warehouse/${warehouse.id}`}>
+              <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
+            </NextLink>
+            <NextLink href={`/warehouse/${warehouse.id}/edit`}>
+              <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+            </NextLink>
+            <IconButton
+              colorScheme="red"
+              aria-label="Delete"
+              icon={<DeleteIcon />}
+              onClick={() => onDeleteClick(+warehouse.id)}
+            />
+          </ButtonGroup>
+        </Flex>
       ))}
     </Layout>
   )

@@ -1,0 +1,5 @@
+mutation CreateWarehouse($name: String!, $sizeX: Int!, $sizeY: Int!, $sizeZ: Int!) {
+  createWarehouse(data: { name: $name, sizeX: $sizeX, sizeY: $sizeY, sizeZ: $sizeZ }) {
+    id
+  }
+}
