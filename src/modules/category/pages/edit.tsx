@@ -27,11 +27,7 @@ export const EditCategory = () => {
   }, [data])
 
   const onSubmit = async (inputData) => {
-    const {
-      data: {
-        updateCategory: { id },
-      },
-    } = await updateCategoryMutation({
+    await updateCategoryMutation({
       variables: {
         id: +router.query.id,
         ...inputData,
@@ -39,7 +35,7 @@ export const EditCategory = () => {
       refetchQueries: [{ query: ListCategoriesDocument }],
     })
 
-    router.push(`/category/${id}`)
+    router.push('/category')
   }
 
   return (
