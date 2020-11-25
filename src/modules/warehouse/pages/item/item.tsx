@@ -31,7 +31,7 @@ export const Item = () => {
           <Text fontSize="xl">Logs</Text>
           {data.item.logs.map((log) => (
             <Text fontFamily="monospace">
-              {log.createdAt}: {log.type} by USER#{log.userId}
+              {log.createdAt}: {log.type} by {log.user.name}
             </Text>
           ))}
         </Box>
