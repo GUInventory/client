@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Image, Text, Flex, Box } from '@chakra-ui/react'
+import { Heading, Image, Text, Grid, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Layout, LoadingScreen, ErrorPage } from '@modules/core/components'
 import { useItemQuery } from '@modules/warehouse/graphql/item/find.generated'
@@ -20,14 +20,22 @@ export const Item = () => {
   return (
     <Layout>
       <Heading>{data.item.name}</Heading>
-      <Text color="gray.400" fontSize="sm">
-        Size: {`${data.item.size.x}x${data.item.size.y}x${data.item.size.z}`}
-      </Text>
-      <Flex flexDirection="row">
-        <Box flex={1}>
+      <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+        <Box>
+          <Text color="gray.400" fontSize="sm">
+            Size: {`${data.item.size.x}x${data.item.size.y}x${data.item.size.z}`}
+          </Text>
           <Image src={data.item.image} />
         </Box>
-      </Flex>
+        <Box flex={1}>
+          <Text fontSize="xl">Logs</Text>
+          {data.item.logs.map((log) => (
+            <Text fontFamily="monospace">
+              {log.createdAt}: {log.type} by {log.user.name}
+            </Text>
+          ))}
+        </Box>
+      </Grid>
     </Layout>
   )
 }
