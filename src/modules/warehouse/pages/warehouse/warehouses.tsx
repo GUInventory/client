@@ -1,8 +1,9 @@
-import { Box, Link, Heading } from '@chakra-ui/react'
+import { Box, Link, Heading, IconButton, Flex } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { AddIcon } from '@chakra-ui/icons'
 
 export const Warehouses = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -25,7 +26,13 @@ export const Warehouses = () => {
           },
         ]}
       />
-      <Heading>Warehouses</Heading>
+      <Flex justifyContent="space-between">
+        <Heading>Warehouses</Heading>
+
+        <NextLink href="/warehouse/new">
+          <IconButton colorScheme="blue" aria-label="Add new warehouse" icon={<AddIcon />} />
+        </NextLink>
+      </Flex>
       {data.myWarehouses.map((warehouse) => (
         <Box borderWidth="1px" rounded="lg" p={4} my={2}>
           {warehouse.name}
