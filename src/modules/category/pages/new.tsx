@@ -17,16 +17,12 @@ export const NewCategory = () => {
   const [createCategoryMutation, { loading }] = useCreateCategoryMutation()
 
   const onSubmit = async (inputData) => {
-    const {
-      data: {
-        createCategory: { id },
-      },
-    } = await createCategoryMutation({
+    await createCategoryMutation({
       variables: inputData,
       refetchQueries: [{ query: ListCategoriesDocument }],
     })
 
-    router.push(`/category/${id}`)
+    router.push('/category')
   }
 
   return (
