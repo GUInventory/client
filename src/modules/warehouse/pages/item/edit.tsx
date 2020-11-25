@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout, Breadcrumb } from '@modules/core/components'
 import { useRouter } from 'next/router'
-import { useItemQuery } from '@modules/warehouse/graphql/item/find.generated'
+import { useItemQuery, ItemDocument } from '@modules/warehouse/graphql/item/find.generated'
 import { useUpdateItemMutation } from '@modules/warehouse/graphql/item/update.generated'
 
 type Inputs = {
@@ -35,6 +35,7 @@ export const EditItem = () => {
         id: +router.query.id,
         ...inputData,
       },
+      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.id } }],
     })
 
     router.push(`/warehouse/storage/item/${id}`)

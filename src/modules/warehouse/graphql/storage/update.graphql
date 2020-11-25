@@ -1,0 +1,23 @@
+mutation UpdateStorage(
+  $id: Int!
+  $name: String
+  $sizeX: Int
+  $sizeY: Int
+  $sizeZ: Int
+  $positionX: Int
+  $positionY: Int
+) {
+  updateStorage(
+    id: $id
+    data: {
+      name: $name
+      sizeX: $sizeX
+      sizeY: $sizeY
+      sizeZ: $sizeZ
+      positionX: $positionX
+      positionY: $positionY
+    }
+  ) {
+    id
+  }
+}

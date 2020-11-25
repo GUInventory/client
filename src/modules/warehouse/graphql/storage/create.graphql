@@ -1,0 +1,23 @@
+mutation CreateStorage(
+  $name: String!
+  $sizeX: Int!
+  $sizeY: Int!
+  $sizeZ: Int!
+  $positionX: Int!
+  $positionY: Int!
+  $warehouse: Int!
+) {
+  createStorage(
+    data: {
+      name: $name
+      sizeX: $sizeX
+      sizeY: $sizeY
+      sizeZ: $sizeZ
+      positionX: $positionX
+      positionY: $positionY
+      warehouse: { id: $warehouse }
+    }
+  ) {
+    id
+  }
+}

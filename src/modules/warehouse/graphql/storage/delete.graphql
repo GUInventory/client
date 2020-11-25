@@ -1,0 +1,5 @@
+mutation DeleteStorage($id: Int!) {
+  deleteStorage(id: $id) {
+    id
+  }
+}
