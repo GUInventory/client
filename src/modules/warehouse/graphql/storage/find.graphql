@@ -7,6 +7,10 @@ query Storage($id: Int!) {
       y
       z
     }
+    position {
+      x
+      y
+    }
     items {
       id
       name
