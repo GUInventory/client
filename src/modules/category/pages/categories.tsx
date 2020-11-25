@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Flex, IconButton } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
-import { useListCategoriesQuery } from '../graphql/list.generated'
+import { useListCategoriesQuery, ListCategoriesDocument } from '../graphql/list.generated'
 import { CategoryElement } from '../components'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
 import { AddIcon } from '@chakra-ui/icons'
@@ -19,7 +19,10 @@ export const Categories = () => {
   }
 
   const onDeleteClick = async (id) => {
-    await deleteCategoryMutation({ variables: { id } })
+    await deleteCategoryMutation({
+      variables: { id },
+      refetchQueries: [{ query: ListCategoriesDocument }],
+    })
   }
 
   return (
