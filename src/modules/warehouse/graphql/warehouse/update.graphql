@@ -1,0 +1,5 @@
+mutation UpdateWarehouse($id: Int!, $name: String, $sizeX: Int, $sizeY: Int, $sizeZ: Int) {
+  updateWarehouse(id: $id, data: { name: $name, sizeX: $sizeX, sizeY: $sizeY, sizeZ: $sizeZ }) {
+    id
+  }
+}

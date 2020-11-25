@@ -1,10 +1,11 @@
-import { Box, Link, Heading, Flex } from '@chakra-ui/react'
+import { Box, Text, Link, Heading, Flex, ButtonGroup, IconButton } from '@chakra-ui/react'
 import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { useWarehouseQuery } from '@modules/warehouse/graphql/warehouse/find.generated'
 import { StoragesContainer, EmptyState } from '../../components'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export const Warehouse = () => {
   const router = useRouter()
@@ -28,8 +29,23 @@ export const Warehouse = () => {
           },
         ]}
       />
-      <Heading mb={5}>{data.warehouse.name}</Heading>
-
+      <Flex justify="space-between">
+        <Box>
+          <Heading mb={5}>{data.warehouse.name}</Heading>
+          <Text>{`${data.warehouse.size.x}x${data.warehouse.size.y}x${data.warehouse.size.z}`}</Text>
+        </Box>
+        <ButtonGroup size="sm" isAttached mt={1} mr={2}>
+          <NextLink href={`/warehouse/${data.warehouse.id}/edit`}>
+            <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+          </NextLink>
+          <IconButton
+            colorScheme="red"
+            aria-label="Delete"
+            icon={<DeleteIcon />}
+            onClick={() => {}}
+          />
+        </ButtonGroup>
+      </Flex>
       {data.warehouse.storages.length === 0 && <EmptyState />}
 
       {data.warehouse.storages.length !== 0 && (
