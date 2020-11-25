@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Layout, Breadcrumb } from '@modules/core/components'
 import { useCreateCategoryMutation } from '../graphql/create.generated'
 import { useRouter } from 'next/router'
+import { ListCategoriesDocument } from '../graphql/list.generated'
 
 type Inputs = {
   name: string
@@ -20,7 +21,10 @@ export const NewCategory = () => {
       data: {
         createCategory: { id },
       },
-    } = await createCategoryMutation({ variables: inputData })
+    } = await createCategoryMutation({
+      variables: inputData,
+      refetchQueries: [{ query: ListCategoriesDocument }],
+    })
 
     router.push(`/category/${id}`)
   }
