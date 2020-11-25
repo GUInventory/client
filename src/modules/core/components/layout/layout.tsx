@@ -1,6 +1,16 @@
 import React from 'react'
-import { Box, Flex, Link, Spinner, Menu, MenuList, MenuItem, MenuButton } from '@chakra-ui/react'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  Link,
+  Spinner,
+  Menu,
+  MenuList,
+  MenuItem,
+  MenuButton,
+  Button,
+} from '@chakra-ui/react'
+import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
 
@@ -22,6 +32,11 @@ export const Layout = ({ children }) => {
           </NextLink>
         </Box>
         <Box>
+          <NextLink href="/warehouse/storage/item/new">
+            <Button size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
+              Add item
+            </Button>
+          </NextLink>
           <NextLink href="/category">
             <Link m={4}>Categories</Link>
           </NextLink>

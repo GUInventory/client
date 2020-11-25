@@ -1,3 +1,6 @@
 export * from './pages/warehouse/warehouses'
 export * from './pages/warehouse/warehouse'
 export * from './pages/storage/storage'
+export * from './pages/item/item'
+export * from './pages/item/new'
+export * from './pages/item/edit'

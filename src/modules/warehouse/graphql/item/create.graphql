@@ -1,0 +1,29 @@
+mutation CreateItem(
+  $name: String!
+  $image: String!
+  $value: Int!
+  $sizeX: Int!
+  $sizeY: Int!
+  $sizeZ: Int!
+  $positionX: Int
+  $positionY: Int
+  $positionZ: Int
+  $storage: Int!
+) {
+  createItem(
+    data: {
+      name: $name
+      image: $image
+      value: $value
+      sizeX: $sizeX
+      sizeY: $sizeY
+      sizeZ: $sizeZ
+      positionX: $positionX
+      positionY: $positionY
+      positionZ: $positionZ
+      storage: { id: $storage }
+    }
+  ) {
+    id
+  }
+}

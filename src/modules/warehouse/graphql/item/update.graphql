@@ -1,0 +1,29 @@
+mutation UpdateItem(
+  $id: Int!
+  $name: String
+  $image: String
+  $value: Int
+  $sizeX: Int
+  $sizeY: Int
+  $sizeZ: Int
+  $positionX: Int
+  $positionY: Int
+  $positionZ: Int
+) {
+  updateItem(
+    id: $id
+    data: {
+      name: $name
+      image: $image
+      value: $value
+      sizeX: $sizeX
+      sizeY: $sizeY
+      sizeZ: $sizeZ
+      positionX: $positionX
+      positionY: $positionY
+      positionZ: $positionZ
+    }
+  ) {
+    id
+  }
+}
