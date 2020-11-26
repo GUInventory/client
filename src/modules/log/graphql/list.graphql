@@ -1,0 +1,15 @@
+query ListLogs {
+  logs {
+    id
+    entityName
+    entityId
+    type
+    user {
+      id
+      name
+    }
+    oldValues
+    newValues
+    createdAt
+  }
+}
