@@ -40,10 +40,13 @@ export const Layout = ({ children }) => {
           <NextLink href="/category">
             <Link m={4}>Categories</Link>
           </NextLink>
+          <NextLink href="/log">
+            <Link m={4}>Logs</Link>
+          </NextLink>
           {loading && <Spinner />}
           {data && (
             <Menu>
-              <MenuButton>
+              <MenuButton ml={3}>
                 Warehouses <ChevronDownIcon />
               </MenuButton>
               <MenuList>
