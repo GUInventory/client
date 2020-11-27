@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   Box,
   Flex,
@@ -14,6 +14,7 @@ import {
   Input,
   Text,
   SimpleGrid,
+  CloseButton,
 } from '@chakra-ui/react'
 import { ChevronDownIcon, AddIcon, SearchIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
@@ -25,6 +26,7 @@ export const Navigation = () => {
   const [query, setQuery] = useState('')
   const [searchEnabled, setSearchEnabled] = useState(false)
   const searchQuery = useSearchQuery({ variables: { query }, skip: !searchEnabled })
+  const searchFieldRef = useRef(null)
 
   const search = (e) => {
     const value = e.target.value
@@ -35,7 +37,11 @@ export const Navigation = () => {
       setSearchEnabled(false)
     }
   }
-
+  const onSearchClose = () => {
+    setQuery('')
+    setSearchEnabled(false)
+    searchFieldRef.current.value = ''
+  }
   return (
     <>
       <Flex
@@ -67,6 +73,7 @@ export const Navigation = () => {
                 bg: 'white',
               }}
               onChange={search}
+              ref={searchFieldRef}
             />
           </InputGroup>
         </Box>
@@ -115,7 +122,10 @@ export const Navigation = () => {
           bg="gray.50"
         >
           <Box w="100%" maxW={1200} minH="100px" m="0 auto">
-            <Text fontSize="2xl">Search</Text>
+            <Flex justify="space-between">
+              <Text fontSize="2xl">Search</Text>
+              <CloseButton onClick={onSearchClose} />
+            </Flex>
             {searchQuery.loading && <Spinner />}
             {searchQuery.data && (
               <>
