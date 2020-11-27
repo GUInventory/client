@@ -3,7 +3,7 @@ import { Heading, Text, Flex, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ItemList, ItemContainer } from '../components'
 import { useStorageQuery } from '../graphql/find.generated'
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 
 export const Storage = () => {
   const router = useRouter()
@@ -27,7 +27,7 @@ export const Storage = () => {
     }
   })
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -60,6 +60,6 @@ export const Storage = () => {
           <ItemList items={items} />
         </Box>
       </Flex>
-    </Layout>
+    </>
   )
 }

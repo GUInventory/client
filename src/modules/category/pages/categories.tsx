@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Flex, IconButton } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useListCategoriesQuery, ListCategoriesDocument } from '../graphql/list.generated'
 import { CategoryElement } from '../components'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
@@ -26,7 +26,7 @@ export const Categories = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -52,6 +52,6 @@ export const Categories = () => {
           onDeleteClick={() => onDeleteClick(+category.id)}
         />
       ))}
-    </Layout>
+    </>
   )
 }

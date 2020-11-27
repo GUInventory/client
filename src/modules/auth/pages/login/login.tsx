@@ -2,7 +2,7 @@ import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/reac
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { Layout, Card } from '../../components'
+import { Card } from '../../components'
 import { useLoginMutation } from '../../graphql/login/login.generated'
 import { useAuthToken } from '../../hooks/use_auth_token'
 
@@ -38,7 +38,7 @@ export const Login = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Card title="Login">
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4}>
@@ -56,6 +56,6 @@ export const Login = () => {
           </Button>
         </form>
       </Card>
-    </Layout>
+    </>
   )
 }

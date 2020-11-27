@@ -1,7 +1,6 @@
 import { Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
 import { useItemQuery, ItemDocument } from '../graphql/find.generated'
 import { useUpdateItemMutation } from '../graphql/update.generated'
@@ -42,7 +41,7 @@ export const EditItem = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Heading>{data?.item?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
@@ -59,6 +58,6 @@ export const EditItem = () => {
           Update
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }

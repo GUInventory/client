@@ -1,7 +1,6 @@
 import { Button, FormControl, FormLabel, Input, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
 import { useCreateStorageMutation } from '../graphql/create.generated'
 
@@ -42,7 +41,7 @@ export const NewStorage = () => {
   }
 
   return (
-    <Layout>
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="name">Name</FormLabel>
@@ -69,6 +68,6 @@ export const NewStorage = () => {
           Create
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }

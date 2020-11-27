@@ -1,8 +1,8 @@
-import { Button, Flex, Heading, Box, IconButton, ButtonGroup } from '@chakra-ui/react'
+import { Flex, Heading, Box, IconButton, ButtonGroup } from '@chakra-ui/react'
 import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useCategoryQuery } from '../graphql/find.generated'
 import { useDeleteCategoryMutation } from '../graphql/delete.generated'
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
@@ -30,7 +30,7 @@ export const Category = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -61,6 +61,6 @@ export const Category = () => {
           </ButtonGroup>
         </Box>
       </Flex>
-    </Layout>
+    </>
   )
 }

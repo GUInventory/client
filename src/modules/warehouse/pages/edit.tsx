@@ -1,7 +1,6 @@
 import { Button, FormControl, FormLabel, Input, Heading, Flex } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
 import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { useUpdateWarehouseMutation } from '../graphql/update.generated'
@@ -49,7 +48,7 @@ export const EditWarehouse = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Heading>{data?.warehouse?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
@@ -70,6 +69,6 @@ export const EditWarehouse = () => {
           Update
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }

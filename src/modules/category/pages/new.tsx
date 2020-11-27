@@ -1,7 +1,7 @@
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout, Breadcrumb } from '@modules/core/components'
+import { Breadcrumb } from '@modules/core/components'
 import { useCreateCategoryMutation } from '../graphql/create.generated'
 import { useRouter } from 'next/router'
 import { ListCategoriesDocument } from '../graphql/list.generated'
@@ -26,7 +26,7 @@ export const NewCategory = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -55,6 +55,6 @@ export const NewCategory = () => {
           Create
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }
