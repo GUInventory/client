@@ -11,7 +11,7 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react'
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { useListLogsQuery } from '../graphql/list.generated'
 
 export const Logs = () => {
@@ -25,7 +25,7 @@ export const Logs = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -61,6 +61,6 @@ export const Logs = () => {
           </AccordionItem>
         ))}
       </Accordion>
-    </Layout>
+    </>
   )
 }

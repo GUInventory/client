@@ -3,7 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
-import { Layout, Card } from '../../components'
+import { Card } from '../../components'
 import { useRegisterMutation } from '../../graphql/register/register.generated'
 import { registerSchema } from './register.validation'
 import { useAuthToken } from '../../hooks/use_auth_token'
@@ -34,7 +34,7 @@ export const Register = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Card title="Register">
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4} isInvalid={!!errors.name}>
@@ -71,6 +71,6 @@ export const Register = () => {
           </Button>
         </form>
       </Card>
-    </Layout>
+    </>
   )
 }

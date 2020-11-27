@@ -1,10 +1,9 @@
 import { Button, FormControl, FormLabel, Input, Heading, Flex } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout, Breadcrumb } from '@modules/core/components'
 import { useRouter } from 'next/router'
-import { useStorageQuery, StorageDocument } from '@modules/warehouse/graphql/storage/find.generated'
-import { useUpdateStorageMutation } from '@modules/warehouse/graphql/storage/update.generated'
+import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
+import { useUpdateStorageMutation } from '../graphql/update.generated'
 
 type Inputs = {
   name: string
@@ -56,7 +55,7 @@ export const EditStorage = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Heading>{data?.storage?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
@@ -85,6 +84,6 @@ export const EditStorage = () => {
           Update
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }

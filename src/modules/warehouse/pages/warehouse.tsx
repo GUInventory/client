@@ -1,15 +1,12 @@
-import { Box, Text, Link, Heading, Flex, ButtonGroup, IconButton, Button } from '@chakra-ui/react'
+import { Box, Text, Heading, Flex, ButtonGroup, IconButton, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import {
-  useWarehouseQuery,
-  WarehouseDocument,
-} from '@modules/warehouse/graphql/warehouse/find.generated'
-import { StoragesContainer, EmptyState } from '../../components'
-import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
+import { StoragesContainer, EmptyState } from '../components'
+import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
-import { useDeleteStorageMutation } from '@modules/warehouse/graphql/storage/delete.generated'
+import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 
 export const Warehouse = () => {
   const router = useRouter()
@@ -31,7 +28,7 @@ export const Warehouse = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -113,6 +110,6 @@ export const Warehouse = () => {
           </Box>
         </Flex>
       )}
-    </Layout>
+    </>
   )
 }

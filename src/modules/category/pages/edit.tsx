@@ -1,7 +1,7 @@
 import { Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout, Breadcrumb } from '@modules/core/components'
+import { Breadcrumb } from '@modules/core/components'
 import { useRouter } from 'next/router'
 import { useUpdateCategoryMutation } from '../graphql/update.generated'
 import { useCategoryQuery } from '../graphql/find.generated'
@@ -39,7 +39,7 @@ export const EditCategory = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Breadcrumb
         data={[
           {
@@ -70,6 +70,6 @@ export const EditCategory = () => {
           Update
         </Button>
       </form>
-    </Layout>
+    </>
   )
 }
