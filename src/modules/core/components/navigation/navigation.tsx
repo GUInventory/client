@@ -41,6 +41,7 @@ export const Navigation = () => {
       <Flex
         justifyContent="space-between"
         p={4}
+        align="center"
         borderBottom="1px"
         borderColor="gray.200"
         h="100%"
@@ -48,13 +49,25 @@ export const Navigation = () => {
       >
         <Box fontWeight="bold">
           <NextLink href="/">
-            <Link m={4}>GUINVENTORY</Link>
+            <Link m={4} fontSize="lg">
+              GUINVENTORY
+            </Link>
           </NextLink>
         </Box>
         <Box flex={1} mx={8}>
           <InputGroup>
             <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-            <Input type="text" w="80%" placeholder="Search.." onChange={search} />
+            <Input
+              type="text"
+              w="200px"
+              bg="gray.50"
+              placeholder="Search items..."
+              _focus={{
+                w: '80%',
+                bg: 'white',
+              }}
+              onChange={search}
+            />
           </InputGroup>
         </Box>
         <Box>
@@ -88,21 +101,20 @@ export const Navigation = () => {
           )}
         </Box>
       </Flex>
-      <Box w="100%">
-        {searchEnabled ? (
-          <Box
-            zIndex="100"
-            borderBottomColor="gray.200"
-            borderBottomWidth="1px"
-            position="absolute"
-            bg="gray.50"
-            w="100%"
-            minH="100px"
-            px={4}
-            pt={4}
-            pb={6}
-            boxShadow="sm"
-          >
+      {searchEnabled ? (
+        <Box
+          w="100%"
+          px={4}
+          pt={4}
+          pb={6}
+          zIndex="100"
+          borderBottomColor="gray.200"
+          borderBottomWidth="1px"
+          position="absolute"
+          boxShadow="sm"
+          bg="gray.50"
+        >
+          <Box w="100%" maxW={1200} minH="100px" m="0 auto">
             <Text fontSize="2xl">Search</Text>
             {searchQuery.loading && <Spinner />}
             {searchQuery.data && (
@@ -147,8 +159,8 @@ export const Navigation = () => {
               </>
             )}
           </Box>
-        ) : null}
-      </Box>
+        </Box>
+      ) : null}
     </>
   )
 }
