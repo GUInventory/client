@@ -1,0 +1,15 @@
+query Search($query: String!) {
+  items(query: $query) {
+    id
+    name
+    image
+    storage {
+      id
+      name
+      warehouse {
+        id
+        name
+      }
+    }
+  }
+}
