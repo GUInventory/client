@@ -1,6 +1,6 @@
 import React from 'react'
-import { Storage } from '@modules/warehouse'
+import { Storage } from '@modules/storage'
 
-export default function LoginPage() {
+export default function StoragePage() {
   return <Storage />
 }

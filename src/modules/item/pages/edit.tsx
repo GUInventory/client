@@ -1,10 +1,10 @@
 import { Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Layout, Breadcrumb } from '@modules/core/components'
+import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
-import { useItemQuery, ItemDocument } from '@modules/warehouse/graphql/item/find.generated'
-import { useUpdateItemMutation } from '@modules/warehouse/graphql/item/update.generated'
+import { useItemQuery, ItemDocument } from '../graphql/find.generated'
+import { useUpdateItemMutation } from '../graphql/update.generated'
 
 type Inputs = {
   name: string

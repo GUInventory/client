@@ -2,14 +2,11 @@ import { Box, Text, Link, Heading, Flex, ButtonGroup, IconButton, Button } from 
 import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import {
-  useWarehouseQuery,
-  WarehouseDocument,
-} from '@modules/warehouse/graphql/warehouse/find.generated'
-import { StoragesContainer, EmptyState } from '../../components'
+import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
+import { StoragesContainer, EmptyState } from '../components'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
-import { useDeleteStorageMutation } from '@modules/warehouse/graphql/storage/delete.generated'
+import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 
 export const Warehouse = () => {
   const router = useRouter()

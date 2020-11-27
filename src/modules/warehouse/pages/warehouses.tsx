@@ -1,13 +1,10 @@
 import { Heading, IconButton, Flex, ButtonGroup } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from 'next/link'
-import {
-  useListMyWarehousesQuery,
-  ListMyWarehousesDocument,
-} from '@modules/warehouse/graphql/warehouse/list.generated'
+import { useListMyWarehousesQuery, ListMyWarehousesDocument } from '../graphql/list.generated'
+import { useDeleteWarehouseMutation } from '../graphql/delete.generated'
 import { Layout, LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { AddIcon, ViewIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons'
-import { useDeleteWarehouseMutation } from '@modules/warehouse/graphql/warehouse/delete.generated'
 
 export const Warehouses = () => {
   const { data, loading, error } = useListMyWarehousesQuery()

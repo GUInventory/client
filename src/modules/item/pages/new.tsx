@@ -3,7 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
-import { useCreateItemMutation } from '@modules/warehouse/graphql/item/create.generated'
+import { useCreateItemMutation } from '../graphql/create.generated'
 
 type Inputs = {
   name: string

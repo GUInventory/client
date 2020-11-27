@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Image, Text, Grid, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Layout, LoadingScreen, ErrorPage } from '@modules/core/components'
-import { useItemQuery } from '@modules/warehouse/graphql/item/find.generated'
+import { useItemQuery } from '../graphql/find.generated'
 
 export const Item = () => {
   const router = useRouter()

@@ -3,8 +3,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Layout } from '@modules/core/components'
 import { useRouter } from 'next/router'
-import { useCreateWarehouseMutation } from '@modules/warehouse/graphql/warehouse/create.generated'
-import { ListMyWarehousesDocument } from '@modules/warehouse/graphql/warehouse/list.generated'
+import { useCreateWarehouseMutation } from '../graphql/create.generated'
+import { ListMyWarehousesDocument } from '../graphql/list.generated'
 
 type Inputs = {
   name: string

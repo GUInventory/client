@@ -17,8 +17,8 @@ import {
 } from '@chakra-ui/react'
 import { ChevronDownIcon, AddIcon, SearchIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/warehouse/list.generated'
-import { useSearchQuery } from '@modules/warehouse/graphql/item/search.generated'
+import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/list.generated'
+import { useSearchQuery } from '@modules/core/graphql/search.generated'
 
 export const Layout = ({ children }) => {
   const { data, loading, error } = useListMyWarehousesQuery()
