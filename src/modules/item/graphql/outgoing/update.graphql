@@ -1,0 +1,5 @@
+mutation UpdateOutgoing($id: Int!, $description: String, $value: Int) {
+  updateOutgoing(id: $id, data: { description: $description, value: $value }) {
+    id
+  }
+}

@@ -1,0 +1,8 @@
+query Outgoing($id: Int!) {
+  outgoing(id: $id) {
+    id
+    description
+    value
+    createdAt
+  }
+}

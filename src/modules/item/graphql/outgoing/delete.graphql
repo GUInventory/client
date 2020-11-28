@@ -1,0 +1,5 @@
+mutation DeleteOutgoing($id: Int!) {
+  deleteOutgoing(id: $id) {
+    id
+  }
+}

@@ -71,17 +71,19 @@ export const Item = () => {
         </Box>
         <Box flex={1}>
           <Text fontSize="xl">Costs</Text>
-          {data.item.outgoings.map((outgoings) => (
+          {data.item.outgoings.map((outgoing) => (
             <Stat borderWidth="1px" borderColor="gray.200" borderRadius="lg" px={4} py={2}>
               <Flex justify="space-between">
                 <Box>
-                  <StatLabel> {outgoings.description}</StatLabel>
-                  <StatNumber>{outgoings.value} HUF</StatNumber>
-                  <StatHelpText> {outgoings.createdAt}</StatHelpText>
+                  <StatLabel> {outgoing.description}</StatLabel>
+                  <StatNumber>{outgoing.value} HUF</StatNumber>
+                  <StatHelpText> {outgoing.createdAt}</StatHelpText>
                 </Box>
 
                 <ButtonGroup size="sm" variant="ghost" isAttached mt={1}>
-                  <NextLink href={``}>
+                  <NextLink
+                    href={`/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}/item/${data.item.id}/cost/${outgoing.id}/edit`}
+                  >
                     <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
                   </NextLink>
                   <IconButton

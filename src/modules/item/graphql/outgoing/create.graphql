@@ -1,0 +1,5 @@
+mutation CreateOutgoing($description: String!, $value: Int!, $item: Int!) {
+  createOutgoing(data: { description: $description, value: $value, item: { id: $item } }) {
+    id
+  }
+}
