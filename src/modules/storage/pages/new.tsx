@@ -3,6 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useCreateStorageMutation } from '../graphql/create.generated'
+import { Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -42,6 +43,23 @@ export const NewStorage = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: `/warehouse/${router.query.warehouse_id}`,
+            title: 'Warehouse',
+          },
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'New',
+          },
+        ]}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="name">Name</FormLabel>

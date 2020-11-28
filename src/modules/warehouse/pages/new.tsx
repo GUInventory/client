@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useCreateWarehouseMutation } from '../graphql/create.generated'
 import { ListMyWarehousesDocument } from '../graphql/list.generated'
+import { Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -35,6 +36,19 @@ export const NewWarehouse = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'New',
+          },
+        ]}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="name">Name</FormLabel>

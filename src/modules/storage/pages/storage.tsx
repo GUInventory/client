@@ -31,6 +31,10 @@ export const Storage = () => {
       <Breadcrumb
         data={[
           {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
             href: `/warehouse/${data.storage.warehouse.id}`,
             title: data.storage.warehouse.name,
           },

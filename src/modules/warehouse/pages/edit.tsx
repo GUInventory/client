@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { useUpdateWarehouseMutation } from '../graphql/update.generated'
+import { Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -51,6 +52,23 @@ export const EditWarehouse = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: `/warehouse/${data?.warehouse?.id}`,
+            title: data?.warehouse?.name,
+          },
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'Edit',
+          },
+        ]}
+      />
       <Heading>{data?.warehouse?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>

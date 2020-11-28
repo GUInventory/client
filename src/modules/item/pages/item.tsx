@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Image, Text, Grid, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { LoadingScreen, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, ErrorPage, Breadcrumb } from '@modules/core/components'
 import { useItemQuery } from '../graphql/find.generated'
 
 export const Item = () => {
@@ -19,6 +19,27 @@ export const Item = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: `/warehouse/${data.item.storage.warehouse.id}`,
+            title: data.item.storage.warehouse.name,
+          },
+          {
+            href: `/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}`,
+            title: data.item.storage.name,
+          },
+          {
+            href: '#',
+            title: data.item.name,
+            isCurrentPage: true,
+          },
+        ]}
+      />
       <Heading>{data.item.name}</Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
         <Box>

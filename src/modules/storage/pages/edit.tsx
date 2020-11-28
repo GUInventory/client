@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
 import { useUpdateStorageMutation } from '../graphql/update.generated'
+import { Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -56,6 +57,28 @@ export const EditStorage = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: `/warehouse/${data?.storage?.warehouse?.id}`,
+            title: data?.storage?.warehouse?.name,
+          },
+          {
+            href: `/warehouse/${data?.storage?.warehouse?.id}/storage/${data?.storage?.id}`,
+            isCurrentPage: true,
+            title: data.storage.name,
+          },
+          {
+            href: '#',
+            isCurrentPage: true,
+            title: 'Edit',
+          },
+        ]}
+      />
       <Heading>{data?.storage?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>

@@ -16,5 +16,13 @@ query Item($id: Int!) {
       type
       createdAt
     }
+    storage {
+      id
+      name
+      warehouse {
+        id
+        name
+      }
+    }
   }
 }

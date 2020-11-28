@@ -37,6 +37,10 @@ export const Warehouse = () => {
       <Breadcrumb
         data={[
           {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
             href: '#',
             isCurrentPage: true,
             title: data.warehouse.name,
