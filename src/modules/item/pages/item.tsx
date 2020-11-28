@@ -1,8 +1,23 @@
 import React from 'react'
-import { Heading, Image, Text, Grid, Box } from '@chakra-ui/react'
+import {
+  Heading,
+  Image,
+  Text,
+  Grid,
+  Box,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+  Flex,
+  ButtonGroup,
+  IconButton,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 import { LoadingScreen, ErrorPage, Breadcrumb } from '@modules/core/components'
 import { useItemQuery } from '../graphql/find.generated'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 export const Item = () => {
   const router = useRouter()
@@ -49,7 +64,33 @@ export const Item = () => {
           <Image src={data.item.image} />
         </Box>
         <Box flex={1}>
-          <Text fontSize="xl">Logs</Text>
+          <Text fontSize="xl">Costs</Text>
+          {data.item.outgoings.map((outgoings) => (
+            <Stat borderWidth="1px" borderColor="gray.200" borderRadius="lg" px={4} py={2}>
+              <Flex justify="space-between">
+                <Box>
+                  <StatLabel> {outgoings.description}</StatLabel>
+                  <StatNumber>{outgoings.value} HUF</StatNumber>
+                  <StatHelpText> {outgoings.createdAt}</StatHelpText>
+                </Box>
+
+                <ButtonGroup size="sm" variant="ghost" isAttached mt={1}>
+                  <NextLink href={``}>
+                    <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+                  </NextLink>
+                  <IconButton
+                    colorScheme="red"
+                    aria-label="Delete"
+                    icon={<DeleteIcon />}
+                    onClick={() => {}}
+                  />
+                </ButtonGroup>
+              </Flex>
+            </Stat>
+          ))}
+          <Text fontSize="xl" mt={4}>
+            Logs
+          </Text>
           {data.item.logs.map((log) => (
             <Text fontFamily="monospace">
               {log.createdAt}: {log.type} by {log.user.name}
