@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { StoragesContainer, EmptyState } from '../components'
-import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Progress, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
 import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 
@@ -90,21 +90,26 @@ export const Warehouse = () => {
             </Flex>
             {data.warehouse.storages.map((storage) => (
               <Flex justify="space-between" borderWidth="1px" rounded="lg" p={4} my={2}>
-                {storage.name}
-                <ButtonGroup size="sm" isAttached mt={1}>
-                  <NextLink href={`/warehouse/storage/${storage.id}`}>
-                    <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
-                  </NextLink>
-                  <NextLink href={`/warehouse/storage/${storage.id}/edit`}>
-                    <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-                  </NextLink>
-                  <IconButton
-                    colorScheme="red"
-                    aria-label="Delete"
-                    icon={<DeleteIcon />}
-                    onClick={() => onDeleteClick(+storage.id)}
-                  />
-                </ButtonGroup>
+                <Flex direction="column" flex={1}>
+                  {storage.name}
+                  <Progress value={storage.usage} />
+                </Flex>
+                <Box flex={1} textAlign="right">
+                  <ButtonGroup size="sm" isAttached mt={1}>
+                    <NextLink href={`/warehouse/storage/${storage.id}`}>
+                      <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
+                    </NextLink>
+                    <NextLink href={`/warehouse/storage/${storage.id}/edit`}>
+                      <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+                    </NextLink>
+                    <IconButton
+                      colorScheme="red"
+                      aria-label="Delete"
+                      icon={<DeleteIcon />}
+                      onClick={() => onDeleteClick(+storage.id)}
+                    />
+                  </ButtonGroup>
+                </Box>
               </Flex>
             ))}
           </Box>
