@@ -8,7 +8,6 @@ import {
   MenuList,
   MenuItem,
   MenuButton,
-  Button,
   InputLeftElement,
   InputGroup,
   Input,
@@ -16,12 +15,12 @@ import {
   SimpleGrid,
   CloseButton,
 } from '@chakra-ui/react'
-import { ChevronDownIcon, AddIcon, SearchIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/list.generated'
 import { useSearchQuery } from '@modules/core/graphql/search.generated'
 import { AuthContext } from '@modules/core/providers/auth_provider'
-import { useRouter } from 'next/router'
+import { CreateButton } from './create_button'
 
 export const Navigation = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -29,8 +28,6 @@ export const Navigation = () => {
   const [searchEnabled, setSearchEnabled] = useState(false)
   const searchQuery = useSearchQuery({ variables: { query }, skip: !searchEnabled })
   const searchFieldRef = useRef(null)
-  const router = useRouter()
-  const { warehouse_id, storage_id, item_id, cost_id } = router.query
 
   const search = (e) => {
     const value = e.target.value
@@ -86,47 +83,7 @@ export const Navigation = () => {
           <AuthContext.Consumer>
             {(user) => (
               <>
-                {warehouse_id && storage_id && !item_id && (
-                  <NextLink href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/new`}>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      colorScheme="blue"
-                      leftIcon={<AddIcon size="sm" />}
-                    >
-                      Add item
-                    </Button>
-                  </NextLink>
-                )}
-
-                {warehouse_id && !storage_id && !item_id && (
-                  <NextLink href={`/warehouse/${warehouse_id}/storage/new`}>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      colorScheme="blue"
-                      leftIcon={<AddIcon size="sm" />}
-                    >
-                      Add storage
-                    </Button>
-                  </NextLink>
-                )}
-
-                {warehouse_id && storage_id && item_id && !cost_id && (
-                  <NextLink
-                    href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/${item_id}/cost/new`}
-                  >
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      colorScheme="blue"
-                      leftIcon={<AddIcon size="sm" />}
-                    >
-                      Add cost
-                    </Button>
-                  </NextLink>
-                )}
-
+                <CreateButton />
                 <NextLink href="/category">
                   <Link m={4}>Categories</Link>
                 </NextLink>
