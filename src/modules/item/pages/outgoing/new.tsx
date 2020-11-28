@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { Breadcrumb } from '@modules/core/components'
 import { useCreateOutgoingMutation } from '@modules/item/graphql/outgoing/create.generated'
+import { ItemDocument } from '@modules/item/graphql/find.generated'
 
 type Inputs = {
   description: string
@@ -23,10 +24,11 @@ export const NewOutgoing = () => {
         value: +inputData.value,
         item: +router.query.item_id,
       },
+      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.item_id } }],
     })
 
     router.push(
-      `/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/${id}`,
+      `/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/${router.query.item_id}`,
     )
   }
 

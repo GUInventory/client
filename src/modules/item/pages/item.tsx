@@ -72,7 +72,7 @@ export const Item = () => {
         <Box flex={1}>
           <Text fontSize="xl">Costs</Text>
           {data.item.outgoings.map((outgoing) => (
-            <Stat borderWidth="1px" borderColor="gray.200" borderRadius="lg" px={4} py={2}>
+            <Stat borderWidth="1px" borderColor="gray.200" borderRadius="lg" px={4} py={2} mb={1}>
               <Flex justify="space-between">
                 <Box>
                   <StatLabel> {outgoing.description}</StatLabel>

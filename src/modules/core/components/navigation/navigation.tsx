@@ -30,7 +30,7 @@ export const Navigation = () => {
   const searchQuery = useSearchQuery({ variables: { query }, skip: !searchEnabled })
   const searchFieldRef = useRef(null)
   const router = useRouter()
-  const { warehouse_id, storage_id, item_id } = router.query
+  const { warehouse_id, storage_id, item_id, cost_id } = router.query
 
   const search = (e) => {
     const value = e.target.value
@@ -111,6 +111,22 @@ export const Navigation = () => {
                     </Button>
                   </NextLink>
                 )}
+
+                {warehouse_id && storage_id && item_id && !cost_id && (
+                  <NextLink
+                    href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/${item_id}/cost/new`}
+                  >
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      colorScheme="blue"
+                      leftIcon={<AddIcon size="sm" />}
+                    >
+                      Add cost
+                    </Button>
+                  </NextLink>
+                )}
+
                 <NextLink href="/category">
                   <Link m={4}>Categories</Link>
                 </NextLink>
