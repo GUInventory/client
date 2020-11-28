@@ -71,19 +71,23 @@ export const Warehouse = () => {
                 w="100%"
                 pb={`${calculateHeight(data.warehouse.size.x, data.warehouse.size.y)}%`}
                 bg="orange.100"
+                position="relative"
               >
-                <StoragesContainer
-                  storages={data.warehouse.storages.map((storage) => {
-                    return {
-                      id: storage.id,
-                      name: storage.name,
-                      size: storage.size,
-                      position: storage.position,
-                    }
-                  })}
-                  setActiveStorage={(id) => setActiveStorage(id)}
-                  activeStorage={activeStorage}
-                />
+                <Box position="absolute" top="0" left="0" width="100%" height="100%">
+                  <StoragesContainer
+                    storages={data.warehouse.storages.map((storage) => {
+                      return {
+                        id: storage.id,
+                        name: storage.name,
+                        size: storage.size,
+                        position: storage.position,
+                      }
+                    })}
+                    warehouseSize={{ x: data.warehouse.size.x, y: data.warehouse.size.y }}
+                    setActiveStorage={(id) => setActiveStorage(id)}
+                    activeStorage={activeStorage}
+                  />
+                </Box>
               </Box>
             </Box>
           </Box>
