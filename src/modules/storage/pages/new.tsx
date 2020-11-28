@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Flex } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -60,6 +60,7 @@ export const NewStorage = () => {
           },
         ]}
       />
+      <Heading>Create Storage</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="name">Name</FormLabel>
