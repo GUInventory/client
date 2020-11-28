@@ -3,6 +3,7 @@ query Item($id: Int!) {
     id
     name
     image
+    value
     size {
       x
       y
@@ -23,6 +24,12 @@ query Item($id: Int!) {
         id
         name
       }
+    }
+    outgoings {
+      id
+      description
+      value
+      createdAt
     }
   }
 }
