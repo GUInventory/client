@@ -6,6 +6,7 @@ type StoragesContainerProps = {
   setActiveStorage: (int) => void
   activeStorage: string
   warehouseSize: { x: number; y: number }
+  warehouseId: string
   storages: {
     id: string
     name: string
@@ -19,6 +20,7 @@ export const StoragesContainer = ({
   activeStorage,
   storages,
   warehouseSize,
+  warehouseId,
 }: StoragesContainerProps) => {
   const parentRef = useRef(null)
   const [ratio, setRatio] = useState(0)
@@ -45,7 +47,7 @@ export const StoragesContainer = ({
   return (
     <Box w="100%" h="100%" ref={parentRef} position="relative">
       {storages.map((storage) => (
-        <NextLink href={`/warehouse/storage/${storage.id}`}>
+        <NextLink href={`/warehouse/${warehouseId}/storage/${storage.id}`}>
           <Link p={1}>
             <Popover trigger="hover">
               <PopoverTrigger>

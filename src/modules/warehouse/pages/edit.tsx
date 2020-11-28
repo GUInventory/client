@@ -15,7 +15,9 @@ type Inputs = {
 export const EditWarehouse = () => {
   const router = useRouter()
   const [updateWarehouseMutation, updateState] = useUpdateWarehouseMutation()
-  const { data, loading, error } = useWarehouseQuery({ variables: { id: +router.query.id } })
+  const { data, loading, error } = useWarehouseQuery({
+    variables: { id: +router.query.warehouse_id },
+  })
 
   const { register, handleSubmit, reset } = useForm<Inputs>()
 
@@ -35,13 +37,13 @@ export const EditWarehouse = () => {
       },
     } = await updateWarehouseMutation({
       variables: {
-        id: +router.query.id,
+        id: +router.query.warehouse_id,
         sizeX: +inputData.sizeX,
         sizeY: +inputData.sizeY,
         sizeZ: +inputData.sizeZ,
         name: inputData.name,
       },
-      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.id } }],
+      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.warehouse_id } }],
     })
 
     router.push(`/warehouse/${id}`)

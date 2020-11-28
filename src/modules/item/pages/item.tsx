@@ -6,10 +6,10 @@ import { useItemQuery } from '../graphql/find.generated'
 
 export const Item = () => {
   const router = useRouter()
-  const { id } = router.query
-  const { data, loading, error } = useItemQuery({ variables: { id: +id } })
+  const { item_id } = router.query
+  const { data, loading, error } = useItemQuery({ variables: { id: +item_id } })
 
-  if (loading || !id) {
+  if (loading || !item_id) {
     return <LoadingScreen />
   }
 

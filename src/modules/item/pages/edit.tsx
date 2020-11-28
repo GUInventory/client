@@ -13,7 +13,7 @@ type Inputs = {
 export const EditItem = () => {
   const router = useRouter()
   const [updateItemMutation, updateState] = useUpdateItemMutation()
-  const { data, loading, error } = useItemQuery({ variables: { id: +router.query.id } })
+  const { data, loading, error } = useItemQuery({ variables: { id: +router.query.item_id } })
 
   const { register, handleSubmit, reset } = useForm<Inputs>()
 
@@ -31,10 +31,10 @@ export const EditItem = () => {
       },
     } = await updateItemMutation({
       variables: {
-        id: +router.query.id,
+        id: +router.query.item_id,
         ...inputData,
       },
-      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.id } }],
+      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.item_id } }],
     })
 
     router.push(`/warehouse/storage/item/${id}`)

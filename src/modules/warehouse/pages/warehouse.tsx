@@ -10,7 +10,9 @@ import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.genera
 
 export const Warehouse = () => {
   const router = useRouter()
-  const { data, loading, error } = useWarehouseQuery({ variables: { id: +router.query.id } })
+  const { data, loading, error } = useWarehouseQuery({
+    variables: { id: +router.query.warehouse_id },
+  })
   const [deleteStorageMutation, deleteState] = useDeleteStorageMutation()
   const [activeStorage, setActiveStorage] = useState('')
 
@@ -24,7 +26,7 @@ export const Warehouse = () => {
   const onDeleteClick = async (id) => {
     await deleteStorageMutation({
       variables: { id },
-      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.id } }],
+      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.warehouse_id } }],
     })
   }
 
@@ -58,7 +60,7 @@ export const Warehouse = () => {
           />
         </ButtonGroup>
       </Flex>
-      {data.warehouse.storages.length === 0 && <EmptyState />}
+      {data.warehouse.storages.length === 0 && <EmptyState warehouseId={data.warehouse.id} />}
 
       {data.warehouse.storages.length !== 0 && (
         <Flex flexDirection={['column', 'column', 'row']} w="100%">
@@ -85,6 +87,7 @@ export const Warehouse = () => {
                         position: storage.position,
                       }
                     })}
+                    warehouseId={data.warehouse.id}
                     warehouseSize={{ x: data.warehouse.size.x, y: data.warehouse.size.y }}
                     setActiveStorage={(id) => setActiveStorage(id)}
                     activeStorage={activeStorage}
@@ -98,7 +101,7 @@ export const Warehouse = () => {
               <Heading size="md" mb={2}>
                 List of Storages
               </Heading>
-              <NextLink href="/warehouse/storage/new">
+              <NextLink href={`/warehouse/${data.warehouse.id}/storage/new`}>
                 <Button
                   size="sm"
                   variant="outline"
@@ -114,6 +117,7 @@ export const Warehouse = () => {
                 justify="space-between"
                 borderWidth="1px"
                 rounded="lg"
+                key={storage.id}
                 p={4}
                 my={2}
                 bg={activeStorage == storage.id ? 'gray.50' : 'white'}
@@ -127,10 +131,10 @@ export const Warehouse = () => {
                 </Flex>
                 <Box flex={1} textAlign="right">
                   <ButtonGroup size="sm" isAttached mt={1}>
-                    <NextLink href={`/warehouse/storage/${storage.id}`}>
+                    <NextLink href={`/warehouse/${data.warehouse.id}/storage/${storage.id}`}>
                       <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
                     </NextLink>
-                    <NextLink href={`/warehouse/storage/${storage.id}/edit`}>
+                    <NextLink href={`/warehouse/${data.warehouse.id}/storage/${storage.id}/edit`}>
                       <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
                     </NextLink>
                     <IconButton
