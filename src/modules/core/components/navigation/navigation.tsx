@@ -21,6 +21,7 @@ import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/list.generated'
 import { useSearchQuery } from '@modules/core/graphql/search.generated'
 import { AuthContext } from '@modules/core/providers/auth_provider'
+import { useRouter } from 'next/router'
 
 export const Navigation = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -28,6 +29,8 @@ export const Navigation = () => {
   const [searchEnabled, setSearchEnabled] = useState(false)
   const searchQuery = useSearchQuery({ variables: { query }, skip: !searchEnabled })
   const searchFieldRef = useRef(null)
+  const router = useRouter()
+  const { warehouse_id, storage_id, item_id } = router.query
 
   const search = (e) => {
     const value = e.target.value
@@ -83,16 +86,31 @@ export const Navigation = () => {
           <AuthContext.Consumer>
             {(user) => (
               <>
-                <NextLink href="/warehouse/storage/item/new">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    colorScheme="blue"
-                    leftIcon={<AddIcon size="sm" />}
-                  >
-                    Add item
-                  </Button>
-                </NextLink>
+                {warehouse_id && storage_id && !item_id && (
+                  <NextLink href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/new`}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      colorScheme="blue"
+                      leftIcon={<AddIcon size="sm" />}
+                    >
+                      Add item
+                    </Button>
+                  </NextLink>
+                )}
+
+                {warehouse_id && !storage_id && !item_id && (
+                  <NextLink href={`/warehouse/${warehouse_id}/storage/new`}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      colorScheme="blue"
+                      leftIcon={<AddIcon size="sm" />}
+                    >
+                      Add storage
+                    </Button>
+                  </NextLink>
+                )}
                 <NextLink href="/category">
                   <Link m={4}>Categories</Link>
                 </NextLink>

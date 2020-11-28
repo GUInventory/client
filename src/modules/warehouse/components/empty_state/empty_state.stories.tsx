@@ -5,4 +5,4 @@ export default {
   title: 'Warehouse/EmptyState',
 }
 
-export const emptyState = () => <EmptyState />
+export const emptyState = () => <EmptyState warehouseId={1} />

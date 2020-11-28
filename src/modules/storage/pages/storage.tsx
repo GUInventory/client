@@ -7,10 +7,10 @@ import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 
 export const Storage = () => {
   const router = useRouter()
-  const { id } = router.query
-  const { data, loading, error } = useStorageQuery({ variables: { id: +id } })
+  const { storage_id } = router.query
+  const { data, loading, error } = useStorageQuery({ variables: { id: +storage_id } })
 
-  if (loading || !id) {
+  if (loading || !storage_id) {
     return <LoadingScreen />
   }
 
@@ -57,7 +57,11 @@ export const Storage = () => {
           <Heading size="md" mb={2}>
             List of Items
           </Heading>
-          <ItemList items={items} />
+          <ItemList
+            items={items}
+            warehouseId={data.storage.warehouse.id}
+            storageId={data.storage.id}
+          />
         </Box>
       </Flex>
     </>

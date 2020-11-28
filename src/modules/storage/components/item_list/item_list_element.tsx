@@ -9,7 +9,7 @@ export type ItemListElementProps = {
   image: string
   value: number
 }
-export const ItemListElement = ({ id, name, image, value }) => (
+export const ItemListElement = ({ id, name, image, value, warehouseId, storageId }) => (
   <Flex flexDirection="row" align="center" rounded="lg" border="1px" borderColor="gray.200">
     <Image src={image} w="48px" h="48px" roundedLeft="lg" mr={4} />
     <Flex justify="space-between" w="100%">
@@ -21,10 +21,10 @@ export const ItemListElement = ({ id, name, image, value }) => (
           {value} HUF
         </Text>
         <ButtonGroup size="sm" isAttached mt={1} mr={2}>
-          <NextLink href={`/warehouse/storage/item/${id}`}>
+          <NextLink href={`/warehouse/${warehouseId}/storage/${storageId}/item/${id}`}>
             <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
           </NextLink>
-          <NextLink href={`/warehouse/storage/item/${id}/edit`}>
+          <NextLink href={`/warehouse/${warehouseId}/storage/${storageId}/item/${id}/edit`}>
             <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
           </NextLink>
           <IconButton

@@ -18,7 +18,7 @@ type Inputs = {
 export const EditStorage = () => {
   const router = useRouter()
   const [updateStorageMutation, updateState] = useUpdateStorageMutation()
-  const { data, loading, error } = useStorageQuery({ variables: { id: +router.query.id } })
+  const { data, loading, error } = useStorageQuery({ variables: { id: +router.query.storage_id } })
 
   const { register, handleSubmit, reset } = useForm<Inputs>()
 
@@ -40,7 +40,7 @@ export const EditStorage = () => {
       },
     } = await updateStorageMutation({
       variables: {
-        id: +router.query.id,
+        id: +router.query.storage_id,
         name: inputData.name,
         positionX: +inputData.positionX,
         positionY: +inputData.positionY,
@@ -48,7 +48,7 @@ export const EditStorage = () => {
         sizeY: +inputData.sizeY,
         sizeZ: +inputData.sizeZ,
       },
-      refetchQueries: [{ query: StorageDocument, variables: { id: +router.query.id } }],
+      refetchQueries: [{ query: StorageDocument, variables: { id: +router.query.storage_id } }],
     })
 
     router.push(`/warehouse/storage/${id}`)
