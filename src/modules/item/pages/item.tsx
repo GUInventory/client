@@ -55,7 +55,13 @@ export const Item = () => {
           },
         ]}
       />
-      <Heading>{data.item.name}</Heading>
+      <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+        <Heading>{data.item.name}</Heading>
+        <Stat textAlign="right">
+          <StatLabel>Value</StatLabel>
+          <StatNumber>{data.item.value} HUF</StatNumber>
+        </Stat>
+      </Grid>
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
         <Box>
           <Text color="gray.400" fontSize="sm">

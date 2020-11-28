@@ -3,6 +3,7 @@ query Item($id: Int!) {
     id
     name
     image
+    value
     size {
       x
       y
