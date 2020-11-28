@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useItemQuery, ItemDocument } from '../graphql/find.generated'
 import { useUpdateItemMutation } from '../graphql/update.generated'
+import { Breadcrumb } from '@modules/core/components'
 
 type Inputs = {
   name: string
@@ -44,6 +45,31 @@ export const EditItem = () => {
 
   return (
     <>
+      <Breadcrumb
+        data={[
+          {
+            href: '/',
+            title: 'Warehouses',
+          },
+          {
+            href: `/warehouse/${data.item.storage.warehouse.id}`,
+            title: data.item.storage.warehouse.name,
+          },
+          {
+            href: `/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}`,
+            title: data.item.storage.name,
+          },
+          {
+            href: `/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}/item/${data.item.id}`,
+            title: data.item.name,
+          },
+          {
+            href: '#',
+            title: 'Edit',
+            isCurrentPage: true,
+          },
+        ]}
+      />
       <Heading>{data?.item?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
