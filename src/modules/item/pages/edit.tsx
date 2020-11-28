@@ -37,7 +37,9 @@ export const EditItem = () => {
       refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.item_id } }],
     })
 
-    router.push(`/warehouse/storage/item/${id}`)
+    router.push(
+      `/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/${id}`,
+    )
   }
 
   return (
