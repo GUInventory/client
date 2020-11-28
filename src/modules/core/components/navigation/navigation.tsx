@@ -20,6 +20,7 @@ import { ChevronDownIcon, AddIcon, SearchIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/list.generated'
 import { useSearchQuery } from '@modules/core/graphql/search.generated'
+import { AuthContext } from '@modules/core/providers/auth_provider'
 
 export const Navigation = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -42,6 +43,7 @@ export const Navigation = () => {
     setSearchEnabled(false)
     searchFieldRef.current.value = ''
   }
+
   return (
     <>
       <Flex
@@ -78,34 +80,57 @@ export const Navigation = () => {
           </InputGroup>
         </Box>
         <Box>
-          <NextLink href="/warehouse/storage/item/new">
-            <Button size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
-              Add item
-            </Button>
-          </NextLink>
-          <NextLink href="/category">
-            <Link m={4}>Categories</Link>
-          </NextLink>
-          <NextLink href="/log">
-            <Link m={4}>Logs</Link>
-          </NextLink>
-          {loading && <Spinner />}
-          {data && (
-            <Menu>
-              <MenuButton ml={3}>
-                Warehouses <ChevronDownIcon />
-              </MenuButton>
-              <MenuList>
-                {data.myWarehouses.map((warehouse) => (
-                  <MenuItem>
-                    <NextLink href={`/warehouse/${warehouse.id}`}>
-                      <Link m={4}>{warehouse.name}</Link>
-                    </NextLink>
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-          )}
+          <AuthContext.Consumer>
+            {(user) => (
+              <>
+                <NextLink href="/warehouse/storage/item/new">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    colorScheme="blue"
+                    leftIcon={<AddIcon size="sm" />}
+                  >
+                    Add item
+                  </Button>
+                </NextLink>
+                <NextLink href="/category">
+                  <Link m={4}>Categories</Link>
+                </NextLink>
+                {user.globalRole == 'ADMIN' && (
+                  <NextLink href="/log">
+                    <Link m={4}>Logs</Link>
+                  </NextLink>
+                )}
+                {loading && <Spinner />}
+                {data && (
+                  <Menu>
+                    <MenuButton ml={3}>
+                      Warehouses <ChevronDownIcon />
+                    </MenuButton>
+                    <MenuList>
+                      {data.myWarehouses.map((warehouse) => (
+                        <MenuItem>
+                          <NextLink href={`/warehouse/${warehouse.id}`}>
+                            <Link m={4}>{warehouse.name}</Link>
+                          </NextLink>
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </Menu>
+                )}
+
+                <Link
+                  m={4}
+                  onClick={() => {
+                    localStorage.removeItem('TOKEN')
+                    window.location.href = '/auth/login'
+                  }}
+                >
+                  Logout
+                </Link>
+              </>
+            )}
+          </AuthContext.Consumer>
         </Box>
       </Flex>
       {searchEnabled ? (
