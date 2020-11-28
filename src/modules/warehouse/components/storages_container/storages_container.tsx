@@ -22,11 +22,24 @@ export const StoragesContainer = ({
 }: StoragesContainerProps) => {
   const parentRef = useRef(null)
   const [ratio, setRatio] = useState(0)
+
   useEffect(() => {
-    if (parentRef.current) {
-      let parentWidth = parentRef.current.offsetWidth
-      setRatio(parentWidth / warehouseSize.x)
+    const handleResize = () => {
+      if (parentRef.current) {
+        let parentWidth = parentRef.current.offsetWidth
+        // Set the ratio
+        setRatio(parentWidth / warehouseSize.x)
+      }
     }
+
+    // Add event listener to the window
+    window.addEventListener('resize', handleResize)
+
+    // Set the initial state
+    handleResize()
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
