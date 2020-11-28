@@ -1,10 +1,10 @@
 import { Box, Text, Heading, Flex, ButtonGroup, IconButton, Button } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { StoragesContainer, EmptyState } from '../components'
-import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
+import { LoadingScreen, Progress, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
 import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 
@@ -12,6 +12,7 @@ export const Warehouse = () => {
   const router = useRouter()
   const { data, loading, error } = useWarehouseQuery({ variables: { id: +router.query.id } })
   const [deleteStorageMutation, deleteState] = useDeleteStorageMutation()
+  const [activeStorage, setActiveStorage] = useState('')
 
   if (error) {
     return <ErrorPage />
@@ -26,6 +27,8 @@ export const Warehouse = () => {
       refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.id } }],
     })
   }
+
+  const calculateHeight = (x, y) => (100 / x) * y
 
   return (
     <>
@@ -59,18 +62,36 @@ export const Warehouse = () => {
 
       {data.warehouse.storages.length !== 0 && (
         <Flex flexDirection={['column', 'column', 'row']} w="100%">
-          <Box flex={1}>
+          <Box flex={1} pr={3} pb={3}>
             <Heading size="md" mb={2}>
               Map of Warehouse
             </Heading>
-            <StoragesContainer
-              storages={data.warehouse.storages.map((storage) => {
-                return {
-                  id: storage.id,
-                  name: storage.name,
-                }
-              })}
-            />
+            <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
+              <Box
+                w="100%"
+                pb={`${calculateHeight(data.warehouse.size.x, data.warehouse.size.y)}%`}
+                bg="gray.100"
+                borderWidth="2px"
+                borderColor="gray.400"
+                position="relative"
+              >
+                <Box position="absolute" top="0" left="0" width="100%" height="100%">
+                  <StoragesContainer
+                    storages={data.warehouse.storages.map((storage) => {
+                      return {
+                        id: storage.id,
+                        name: storage.name,
+                        size: storage.size,
+                        position: storage.position,
+                      }
+                    })}
+                    warehouseSize={{ x: data.warehouse.size.x, y: data.warehouse.size.y }}
+                    setActiveStorage={(id) => setActiveStorage(id)}
+                    activeStorage={activeStorage}
+                  />
+                </Box>
+              </Box>
+            </Box>
           </Box>
           <Box flex={1}>
             <Flex justify="space-between">
@@ -89,22 +110,37 @@ export const Warehouse = () => {
               </NextLink>
             </Flex>
             {data.warehouse.storages.map((storage) => (
-              <Flex justify="space-between" borderWidth="1px" rounded="lg" p={4} my={2}>
-                {storage.name}
-                <ButtonGroup size="sm" isAttached mt={1}>
-                  <NextLink href={`/warehouse/storage/${storage.id}`}>
-                    <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
-                  </NextLink>
-                  <NextLink href={`/warehouse/storage/${storage.id}/edit`}>
-                    <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-                  </NextLink>
-                  <IconButton
-                    colorScheme="red"
-                    aria-label="Delete"
-                    icon={<DeleteIcon />}
-                    onClick={() => onDeleteClick(+storage.id)}
-                  />
-                </ButtonGroup>
+              <Flex
+                justify="space-between"
+                borderWidth="1px"
+                rounded="lg"
+                p={4}
+                my={2}
+                bg={activeStorage == storage.id ? 'gray.50' : 'white'}
+                boxShadow={activeStorage == storage.id ? 'md' : ''}
+                onMouseEnter={() => setActiveStorage(storage.id)}
+                onMouseLeave={() => setActiveStorage('')}
+              >
+                <Flex direction="column" flex={1}>
+                  {storage.name}
+                  <Progress value={storage.usage} />
+                </Flex>
+                <Box flex={1} textAlign="right">
+                  <ButtonGroup size="sm" isAttached mt={1}>
+                    <NextLink href={`/warehouse/storage/${storage.id}`}>
+                      <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
+                    </NextLink>
+                    <NextLink href={`/warehouse/storage/${storage.id}/edit`}>
+                      <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+                    </NextLink>
+                    <IconButton
+                      colorScheme="red"
+                      aria-label="Delete"
+                      icon={<DeleteIcon />}
+                      onClick={() => onDeleteClick(+storage.id)}
+                    />
+                  </ButtonGroup>
+                </Box>
               </Flex>
             ))}
           </Box>
