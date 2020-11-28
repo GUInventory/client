@@ -2,9 +2,17 @@ import React from 'react'
 import { Box, Flex, Link, Popover, PopoverTrigger, PopoverContent, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
-type StoragesContainerProps = { storages: { id: string; name: string }[] }
+type StoragesContainerProps = {
+  setActiveStorage: (int) => void
+  activeStorage: string
+  storages: { id: string; name: string }[]
+}
 
-export const StoragesContainer = ({ storages }: StoragesContainerProps) => (
+export const StoragesContainer = ({
+  setActiveStorage,
+  activeStorage,
+  storages,
+}: StoragesContainerProps) => (
   <Flex mb={3}>
     {storages.map((storage) => (
       <NextLink href={`/warehouse/storage/${storage.id}`}>
@@ -13,8 +21,10 @@ export const StoragesContainer = ({ storages }: StoragesContainerProps) => (
             <PopoverTrigger>
               <Box
                 rounded="lg"
-                backgroundColor="orange.400"
+                backgroundColor={activeStorage == storage.id ? 'orange.300' : 'orange.400'}
                 _hover={{ backgroundColor: 'orange.300' }}
+                onMouseEnter={() => setActiveStorage(storage.id)}
+                onMouseLeave={() => setActiveStorage('')}
               >
                 <Box w="48px" h="48px"></Box>
               </Box>
