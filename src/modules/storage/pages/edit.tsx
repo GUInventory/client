@@ -52,7 +52,7 @@ export const EditStorage = () => {
       refetchQueries: [{ query: StorageDocument, variables: { id: +router.query.storage_id } }],
     })
 
-    router.push(`/warehouse/storage/${id}`)
+    router.push(`/warehouse/${router.query.warehouse_id}/storage/${id}`)
   }
 
   return (
@@ -70,7 +70,7 @@ export const EditStorage = () => {
           {
             href: `/warehouse/${data?.storage?.warehouse?.id}/storage/${data?.storage?.id}`,
             isCurrentPage: true,
-            title: data.storage.name,
+            title: data?.storage?.name,
           },
           {
             href: '#',
