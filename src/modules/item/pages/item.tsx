@@ -16,13 +16,15 @@ import {
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { LoadingScreen, ErrorPage, Breadcrumb } from '@modules/core/components'
-import { useItemQuery } from '../graphql/find.generated'
+import { useItemQuery, ItemDocument } from '../graphql/find.generated'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { useDeleteOutgoingMutation } from '../graphql/outgoing/delete.generated'
 
 export const Item = () => {
   const router = useRouter()
   const { item_id } = router.query
   const { data, loading, error } = useItemQuery({ variables: { id: +item_id } })
+  const [deleteOutgoingMutation, deleteState] = useDeleteOutgoingMutation()
 
   if (loading || !item_id) {
     return <LoadingScreen />
@@ -30,6 +32,13 @@ export const Item = () => {
 
   if (error) {
     return <ErrorPage />
+  }
+
+  const onDeleteClick = async (id) => {
+    await deleteOutgoingMutation({
+      variables: { id },
+      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.item_id } }],
+    })
   }
 
   return (
@@ -90,7 +99,9 @@ export const Item = () => {
                     colorScheme="red"
                     aria-label="Delete"
                     icon={<DeleteIcon />}
-                    onClick={() => {}}
+                    onClick={() => {
+                      onDeleteClick(+outgoing.id)
+                    }}
                   />
                 </ButtonGroup>
               </Flex>
