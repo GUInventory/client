@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Breadcrumb } from '@modules/core/components'
@@ -40,6 +40,7 @@ export const NewCategory = () => {
           },
         ]}
       />
+      <Heading>Create Category</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={4}>
           <FormLabel htmlFor="name">Name</FormLabel>

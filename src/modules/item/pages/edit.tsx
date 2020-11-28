@@ -52,16 +52,16 @@ export const EditItem = () => {
             title: 'Warehouses',
           },
           {
-            href: `/warehouse/${data.item.storage.warehouse.id}`,
-            title: data.item.storage.warehouse.name,
+            href: `/warehouse/${data?.item?.storage?.warehouse?.id}`,
+            title: data?.item?.storage?.warehouse?.name,
           },
           {
-            href: `/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}`,
-            title: data.item.storage.name,
+            href: `/warehouse/${data?.item?.storage?.warehouse?.id}/storage/${data?.item?.storage?.id}`,
+            title: data?.item?.storage?.name,
           },
           {
-            href: `/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}/item/${data.item.id}`,
-            title: data.item.name,
+            href: `/warehouse/${data?.item?.storage?.warehouse?.id}/storage/${data?.item?.storage?.id}/item/${data?.item?.id}`,
+            title: data?.item?.name,
           },
           {
             href: '#',
