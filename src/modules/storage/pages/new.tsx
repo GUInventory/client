@@ -33,11 +33,11 @@ export const NewStorage = () => {
         sizeX: +inputData.sizeX,
         sizeY: +inputData.sizeY,
         sizeZ: +inputData.sizeZ,
-        warehouse: router.query.warehouse_id,
+        warehouse: +router.query.warehouse_id,
       },
     })
 
-    router.push(`/warehouse/storage/${id}`)
+    router.push(`/warehouse/${router.query.warehouse_id}/storage/${id}`)
   }
 
   return (
