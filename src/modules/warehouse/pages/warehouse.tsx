@@ -70,7 +70,9 @@ export const Warehouse = () => {
               <Box
                 w="100%"
                 pb={`${calculateHeight(data.warehouse.size.x, data.warehouse.size.y)}%`}
-                bg="orange.100"
+                bg="gray.100"
+                borderWidth="2px"
+                borderColor="gray.400"
                 position="relative"
               >
                 <Box position="absolute" top="0" left="0" width="100%" height="100%">

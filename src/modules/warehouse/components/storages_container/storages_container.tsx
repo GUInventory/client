@@ -43,9 +43,9 @@ export const StoragesContainer = ({
                   top={`${ratio * storage.position.x}px`}
                   left={`${ratio * storage.position.y}px`}
                   borderWidth="1px"
-                  borderColor="orange.200"
-                  backgroundColor={activeStorage == storage.id ? 'orange.300' : 'orange.400'}
-                  _hover={{ backgroundColor: 'orange.300' }}
+                  borderColor="blue.200"
+                  backgroundColor={activeStorage == storage.id ? 'blue.300' : 'blue.400'}
+                  _hover={{ backgroundColor: 'blue.300' }}
                   onMouseEnter={() => setActiveStorage(storage.id)}
                   onMouseLeave={() => setActiveStorage('')}
                 >
