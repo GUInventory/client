@@ -87,7 +87,7 @@ export const Navigation = () => {
                 {/* <NextLink href="/category">
                   <Link m={4}>Categories</Link>
                 </NextLink>*/}
-                {user.globalRole == 'ADMIN' && (
+                {user?.globalRole == 'ADMIN' && (
                   <NextLink href="/log">
                     <Link m={4}>Logs</Link>
                   </NextLink>
