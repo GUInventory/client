@@ -136,7 +136,6 @@ export const Storage = () => {
                   justify="space-between"
                   borderWidth="1px"
                   key={item.id}
-                  p={4}
                   my={2}
                   bg={activeItem == item.id ? 'gray.50' : 'white'}
                   boxShadow={activeItem == item.id ? 'md' : ''}
