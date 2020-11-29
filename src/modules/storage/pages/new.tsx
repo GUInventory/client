@@ -55,7 +55,7 @@ export const NewStorage = () => {
 
     router.push(`/warehouse/${router.query.warehouse_id}/storage/${id}`)
   }
-  console.log(errors)
+
   return (
     <>
       <Breadcrumb
