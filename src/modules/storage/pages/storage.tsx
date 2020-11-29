@@ -104,6 +104,7 @@ export const Storage = () => {
                     <ItemContainer
                       items={items}
                       storageId={data.storage.id}
+                      warehouseId={data.storage.warehouse.id}
                       storageSize={{ x: data.storage.size.x, y: data.storage.size.y }}
                       setActiveItem={(id) => setActiveItem(id)}
                       activeItem={activeItem}
@@ -117,7 +118,9 @@ export const Storage = () => {
                 <Heading size="md" mb={2}>
                   List of Items
                 </Heading>
-                <NextLink href={`/warehouse/storage/new`}>
+                <NextLink
+                  href={`/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/new`}
+                >
                   <Button
                     size="sm"
                     variant="outline"
