@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Heading, Text, Flex, Box, Button, ButtonGroup, IconButton, Image } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { ItemContainer } from '../components'
+import ItemContainer from '../components/item_container/item_container'
 import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
 import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { AddIcon, ViewIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useDeleteItemMutation } from '@modules/item/graphql/delete.generated'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export const Storage = () => {
   const router = useRouter()
@@ -91,27 +93,29 @@ export const Storage = () => {
               <Heading size="md" mb={2}>
                 Content of Storage
               </Heading>
-              <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
-                <Box
-                  w="100%"
-                  pb={`${calculateHeight(data.storage.size.x, data.storage.size.y)}%`}
-                  bg="gray.100"
-                  borderWidth="2px"
-                  borderColor="gray.400"
-                  position="relative"
-                >
-                  <Box position="absolute" top="0" left="0" width="100%" height="100%">
-                    <ItemContainer
-                      items={items}
-                      storageId={data.storage.id}
-                      warehouseId={data.storage.warehouse.id}
-                      storageSize={{ x: data.storage.size.x, y: data.storage.size.y }}
-                      setActiveItem={(id) => setActiveItem(id)}
-                      activeItem={activeItem}
-                    />
+              <DndProvider backend={HTML5Backend}>
+                <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
+                  <Box
+                    w="100%"
+                    pb={`${calculateHeight(data.storage.size.x, data.storage.size.y)}%`}
+                    bg="gray.100"
+                    borderWidth="2px"
+                    borderColor="gray.400"
+                    position="relative"
+                  >
+                    <Box position="absolute" top="0" left="0" width="100%" height="100%">
+                      <ItemContainer
+                        items={items}
+                        storageId={data.storage.id}
+                        warehouseId={data.storage.warehouse.id}
+                        storageSize={{ x: data.storage.size.x, y: data.storage.size.y }}
+                        setActiveItem={(id) => setActiveItem(id)}
+                        activeItem={activeItem}
+                      />
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
+              </DndProvider>
             </Box>
             <Box flex={1}>
               <Flex justify="space-between">

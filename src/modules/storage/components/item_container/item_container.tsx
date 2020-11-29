@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Box, Flex, Link, Popover, PopoverTrigger, PopoverContent, Text } from '@chakra-ui/react'
-import NextLink from 'next/link'
-import { ItemContainerElement } from './item_container_element'
+import { Box } from '@chakra-ui/react'
+import Item from './item'
+import { useDrop, DropTarget } from 'react-dnd'
+import { useUpdateItemMutation } from '@modules/item/graphql/update.generated'
+import { ItemDocument } from '@modules/item/graphql/find.generated'
 
 type ItemsContainerProps = {
   setActiveItem: (int) => void
@@ -19,6 +21,16 @@ type ItemsContainerProps = {
   }[]
 }
 
+const itemTarget = {
+  drop(props, monitor, component) {
+    const item = monitor.getItem()
+    const delta = monitor.getDifferenceFromInitialOffset()
+    const left = Math.round(item.left + delta.x)
+    const top = Math.round(item.top + delta.y)
+
+    component.moveBox(item.id, left, top)
+  },
+}
 export const ItemContainer = ({
   setActiveItem,
   activeItem,
@@ -29,6 +41,7 @@ export const ItemContainer = ({
 }: ItemsContainerProps) => {
   const parentRef = useRef(null)
   const [ratio, setRatio] = useState(0)
+  const [updateItemMutation, updateState] = useUpdateItemMutation()
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,57 +51,59 @@ export const ItemContainer = ({
         setRatio(parentWidth / storageSize.x)
       }
     }
-
     // Add event listener to the window
     window.addEventListener('resize', handleResize)
-
     // Set the initial state
     handleResize()
-
     // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept: 'Item',
+    drop: async (item: any, monitor) => {
+      const { x, y } = monitor.getDifferenceFromInitialOffset()
+      await updateItemMutation({
+        variables: {
+          id: +item.id,
+          positionX: Math.round(item.x + y / ratio),
+          positionY: Math.round(item.y + x / ratio),
+        },
+        refetchQueries: [{ query: ItemDocument, variables: { id: +item.id } }],
+      })
+    },
+    canDrop: () => true,
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop(),
+    }),
+  })
 
   return (
-    <Box w="100%" h="100%" ref={parentRef} position="relative">
-      {items.map((item) => (
-        <NextLink href={`/warehouse/${warehouseId}/storage/${storageId}/item/${item.id}`}>
-          <Link p={1}>
-            <Popover trigger="hover">
-              <PopoverTrigger>
-                <Box
-                  position="absolute"
-                  w={`${ratio * item.size.x}px`}
-                  h={`${ratio * item.size.y}px`}
-                  top={`${ratio * item.position.x}px`}
-                  left={`${ratio * item.position.y}px`}
-                  borderWidth="1px"
-                  borderColor="blue.200"
-                  backgroundColor={activeItem == item.id ? 'blue.300' : 'blue.400'}
-                  _hover={{ backgroundColor: 'blue.300' }}
-                  onMouseEnter={() => setActiveItem(item.id)}
-                  onMouseLeave={() => setActiveItem('')}
-                >
-                  <Box></Box>
-                </Box>
-              </PopoverTrigger>
-
-              <PopoverContent
-                border="0"
-                bg="gray.700"
-                color="white"
-                zIndex={4}
-                width="300px"
-                opacity={0.8}
-              >
-                <Box p={5}>
-                  <Text fontWeight="bold">{item.name}</Text>
-                </Box>
-              </PopoverContent>
-            </Popover>
-          </Link>
-        </NextLink>
-      ))}
-    </Box>
+    <div
+      ref={drop}
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Box w="100%" h="100%" ref={parentRef} position="relative">
+        {items.map((item) => (
+          <Item
+            item={item}
+            storageId={storageId}
+            warehouseId={warehouseId}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+            ratio={ratio}
+          />
+        ))}
+      </Box>
+    </div>
   )
 }
+
+export default DropTarget('Item', itemTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+}))(ItemContainer)
