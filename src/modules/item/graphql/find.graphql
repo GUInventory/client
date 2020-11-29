@@ -12,6 +12,7 @@ query Item($id: Int!) {
     position {
       x
       y
+      z
     }
     logs {
       user {

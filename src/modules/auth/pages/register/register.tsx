@@ -38,7 +38,7 @@ export const Register = () => {
       <Card title="Register">
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl mb={4} isInvalid={!!errors.name}>
-            <FormLabel htmlFor="email">Name</FormLabel>
+            <FormLabel htmlFor="name">Name</FormLabel>
             <Input name="name" type="text" ref={register} placeholder="John Doe" />
             <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
           </FormControl>

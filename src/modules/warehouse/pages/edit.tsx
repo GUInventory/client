@@ -1,10 +1,23 @@
-import { Button, FormControl, FormLabel, Input, Heading, Flex } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Heading,
+  Flex,
+  FormErrorMessage,
+  InputRightAddon,
+  InputGroup,
+  Box,
+} from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { useUpdateWarehouseMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { warehouseSchema } from '../validators'
 
 type Inputs = {
   name: string
@@ -20,7 +33,9 @@ export const EditWarehouse = () => {
     variables: { id: +router.query.warehouse_id },
   })
 
-  const { register, handleSubmit, reset } = useForm<Inputs>()
+  const { register, handleSubmit, reset, errors } = useForm<Inputs>({
+    resolver: yupResolver(warehouseSchema),
+  })
 
   useEffect(() => {
     reset({
@@ -71,19 +86,42 @@ export const EditWarehouse = () => {
       />
       <Heading>{data?.warehouse?.name}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl mb={4}>
+        <FormControl mb={4} isInvalid={!!errors.name}>
           <FormLabel htmlFor="name">Name</FormLabel>
           <Input name="name" type="text" ref={register} />
+          <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
         </FormControl>
 
-        <FormControl mb={4}>
-          <FormLabel htmlFor="image">Size</FormLabel>
-          <Flex align="center">
-            <Input name="sizeX" type="number" ref={register} />x
-            <Input name="sizeY" type="number" ref={register} />x
-            <Input name="sizeZ" type="number" ref={register} />
-          </Flex>
-        </FormControl>
+        <FormLabel htmlFor="image">Size</FormLabel>
+        <Flex mb={4}>
+          <FormControl isInvalid={!!errors.sizeX}>
+            <InputGroup>
+              <Input name="sizeX" type="number" ref={register} />
+              <InputRightAddon children="cm" />
+            </InputGroup>
+            <FormErrorMessage>{errors.sizeX?.message}</FormErrorMessage>
+          </FormControl>
+          <Box px={3} pt={2}>
+            X
+          </Box>
+          <FormControl isInvalid={!!errors.sizeY}>
+            <InputGroup>
+              <Input name="sizeY" type="number" ref={register} />
+              <InputRightAddon children="cm" />
+            </InputGroup>
+            <FormErrorMessage>{errors.sizeY?.message}</FormErrorMessage>
+          </FormControl>
+          <Box px={3} pt={2}>
+            X
+          </Box>
+          <FormControl isInvalid={!!errors.sizeZ}>
+            <InputGroup>
+              <Input name="sizeZ" type="number" ref={register} />
+              <InputRightAddon children="cm" />
+            </InputGroup>
+            <FormErrorMessage>{errors.sizeZ?.message}</FormErrorMessage>
+          </FormControl>
+        </Flex>
 
         <Button colorScheme="blue" type="submit" isLoading={updateState.loading}>
           Update
