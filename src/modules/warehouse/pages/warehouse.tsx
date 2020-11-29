@@ -52,16 +52,10 @@ export const Warehouse = () => {
           <Heading mb={5}>{data.warehouse.name}</Heading>
           <Text>{`${data.warehouse.size.x}x${data.warehouse.size.y}x${data.warehouse.size.z}`}</Text>
         </Box>
-        <ButtonGroup size="sm" isAttached mt={1} mr={2}>
+        <ButtonGroup size="sm" variant="ghost" isAttached mt={1} mr={2}>
           <NextLink href={`/warehouse/${data.warehouse.id}/edit`}>
             <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
           </NextLink>
-          <IconButton
-            colorScheme="red"
-            aria-label="Delete"
-            icon={<DeleteIcon />}
-            onClick={() => {}}
-          />
         </ButtonGroup>
       </Flex>
       {data.warehouse.storages.length === 0 && <EmptyState warehouseId={data.warehouse.id} />}

@@ -69,16 +69,23 @@ export const Storage = () => {
           },
         ]}
       />
-      <Heading>{data.storage.name}</Heading>
-      <Text color="gray.400" fontSize="sm">
-        Size: {`${data.storage.size.x}x${data.storage.size.y}x${data.storage.size.z}`}
-      </Text>
+      <Flex justify="space-between">
+        <Box>
+          <Heading mb={5}>{data.storage.name}</Heading>
+          <Text color="gray.400" fontSize="sm">
+            Size: {`${data.storage.size.x}x${data.storage.size.y}x${data.storage.size.z}`}
+          </Text>
+        </Box>
+        <ButtonGroup size="sm" variant="ghost" isAttached mt={1} mr={2}>
+          <NextLink
+            href={`/warehouse/${data.storage.warehouse.id}/storage/${data.storage.id}/edit`}
+          >
+            <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+          </NextLink>
+        </ButtonGroup>
+      </Flex>
       <Flex flexDirection="row">
         <Box flex={1}>
-          <Heading size="md" mb={2}>
-            Storage
-          </Heading>
-
           <Flex flexDirection={['column', 'column', 'row']} w="100%">
             <Box flex={1} pr={3} pb={3}>
               <Heading size="md" mb={2}>
