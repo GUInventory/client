@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 import { useCreateStorageMutation } from '../graphql/create.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { createSchema } from '../validators'
+import { storageSchema } from '../validators'
 
 type Inputs = {
   name: string
@@ -31,7 +31,7 @@ type Inputs = {
 
 export const NewStorage = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>({
-    resolver: yupResolver(createSchema),
+    resolver: yupResolver(storageSchema),
   })
   const router = useRouter()
   const [createStorageMutation, { loading }] = useCreateStorageMutation()
