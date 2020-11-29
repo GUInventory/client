@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Heading, FormErrorMessage } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -6,6 +6,8 @@ import { Breadcrumb } from '@modules/core/components'
 import { ItemDocument } from '@modules/item/graphql/find.generated'
 import { useOutgoingQuery } from '@modules/item/graphql/outgoing/find.generated'
 import { useUpdateOutgoingMutation } from '@modules/item/graphql/outgoing/update.generated'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { outgoingSchema } from '@modules/item/validators/outgoing'
 
 type Inputs = {
   description: string
@@ -19,8 +21,9 @@ export const EditOutgoing = () => {
     variables: { id: +router.query.cost_id },
   })
 
-  const { register, handleSubmit, reset } = useForm<Inputs>()
-
+  const { register, handleSubmit, reset, errors } = useForm<Inputs>({
+    resolver: yupResolver(outgoingSchema),
+  })
   useEffect(() => {
     reset({
       description: data?.outgoing?.description,
@@ -72,14 +75,16 @@ export const EditOutgoing = () => {
       />
       <Heading>{data?.outgoing?.description}</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl mb={4}>
-          <FormLabel htmlFor="description">Description</FormLabel>
+        <FormControl mb={4} isInvalid={!!errors.description}>
+          <FormLabel htmlFor="name">Description</FormLabel>
           <Input name="description" type="text" ref={register} />
+          <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
         </FormControl>
 
-        <FormControl mb={4}>
-          <FormLabel htmlFor="image">Value</FormLabel>
+        <FormControl mb={4} isInvalid={!!errors.value}>
+          <FormLabel htmlFor="value">Value</FormLabel>
           <Input name="value" type="text" ref={register} />
+          <FormErrorMessage>{errors.value?.message}</FormErrorMessage>
         </FormControl>
 
         <Button colorScheme="blue" type="submit" isLoading={updateState.loading}>
