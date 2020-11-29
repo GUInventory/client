@@ -16,6 +16,15 @@ query Storage($id: Int!) {
       name
       image
       value
+      size {
+        x
+        y
+        z
+      }
+      position {
+        x
+        y
+      }
     }
     warehouse {
       id
