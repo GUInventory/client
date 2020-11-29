@@ -1,5 +1,5 @@
 import React from 'react'
-import { Progress as ChakraProgress, Tooltip } from '@chakra-ui/react'
+import { Progress as ChakraProgress } from '@chakra-ui/react'
 
 const getColor = (percent) => {
   switch (true) {
