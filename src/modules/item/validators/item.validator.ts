@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const createSchema = yup.object().shape({
+export const itemSchema = yup.object().shape({
   name: yup.string().required(),
   image: yup.string().required(),
   value: yup.number().required().typeError('Must be a number'),

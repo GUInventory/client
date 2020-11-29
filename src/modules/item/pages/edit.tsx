@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 import { useItemQuery, ItemDocument } from '../graphql/find.generated'
 import { useUpdateItemMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
-import { updateSchema } from '../validators'
+import { itemSchema } from '../validators'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 type Inputs = {
@@ -38,7 +38,7 @@ export const EditItem = () => {
   const { data, loading, error } = useItemQuery({ variables: { id: +router.query.item_id } })
 
   const { register, handleSubmit, reset, errors } = useForm<Inputs>({
-    resolver: yupResolver(updateSchema),
+    resolver: yupResolver(itemSchema),
   })
 
   useEffect(() => {

@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 import { useCreateItemMutation } from '../graphql/create.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { createSchema } from '../validators'
+import { itemSchema } from '../validators'
 
 type Inputs = {
   name: string
@@ -33,7 +33,7 @@ type Inputs = {
 
 export const NewItem = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>({
-    resolver: yupResolver(createSchema),
+    resolver: yupResolver(itemSchema),
   })
   const router = useRouter()
   const [createItemMutation, { loading }] = useCreateItemMutation()
