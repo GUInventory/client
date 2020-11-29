@@ -119,7 +119,7 @@ export const EditStorage = () => {
               <Input name="sizeY" type="number" ref={register} />
               <InputRightAddon children="cm" />
             </InputGroup>
-            <FormErrorMessage>{errors.sizeZ?.message}</FormErrorMessage>
+            <FormErrorMessage>{errors.sizeY?.message}</FormErrorMessage>
           </FormControl>
           <Box px={3} pt={2}>
             X
@@ -129,7 +129,7 @@ export const EditStorage = () => {
               <Input name="sizeZ" type="number" ref={register} />
               <InputRightAddon children="cm" />
             </InputGroup>
-            <FormErrorMessage>{errors.sizeY?.message}</FormErrorMessage>
+            <FormErrorMessage>{errors.sizeZ?.message}</FormErrorMessage>
           </FormControl>
         </Flex>
 
