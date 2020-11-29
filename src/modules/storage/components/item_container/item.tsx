@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Link, Popover, PopoverTrigger, PopoverContent, Text } from '@chakra-ui/react'
+import { Box, Popover, PopoverTrigger, PopoverContent, Text } from '@chakra-ui/react'
 import { useDrag } from 'react-dnd'
 
 import { DragSource } from 'react-dnd'

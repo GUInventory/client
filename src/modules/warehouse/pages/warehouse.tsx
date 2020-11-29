@@ -81,8 +81,15 @@ export const Warehouse = () => {
                       return {
                         id: storage.id,
                         name: storage.name,
-                        size: storage.size,
-                        position: storage.position,
+                        size: {
+                          x: storage.size.x,
+                          y: storage.size.y,
+                          z: storage.size.z,
+                        },
+                        position: {
+                          x: storage.position.x,
+                          y: storage.position.y,
+                        },
                       }
                     })}
                     warehouseId={data.warehouse.id}

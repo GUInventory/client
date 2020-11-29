@@ -6,5 +6,12 @@ export default {
 }
 
 export const listElement = () => (
-  <ItemListElement image="https://placehold.it/60x60" name="Item name" value={4500} />
+  <ItemListElement
+    id={1}
+    warehouseId="1"
+    storageId="1"
+    image="https://placehold.it/60x60"
+    name="Item name"
+    value={4500}
+  />
 )

@@ -89,14 +89,7 @@ export const ItemContainer = ({
     >
       <Box w="100%" h="100%" ref={parentRef} position="relative">
         {items.map((item) => (
-          <Item
-            item={item}
-            storageId={storageId}
-            warehouseId={warehouseId}
-            activeItem={activeItem}
-            setActiveItem={setActiveItem}
-            ratio={ratio}
-          />
+          <Item item={item} activeItem={activeItem} setActiveItem={setActiveItem} ratio={ratio} />
         ))}
       </Box>
     </div>
