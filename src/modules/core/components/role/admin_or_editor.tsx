@@ -5,16 +5,16 @@ import { useRouter } from 'next/router'
 export const AdminOrEditor = ({ children }) => {
   const router = useRouter()
   const hasRole = (user) => {
-    user.roles.map((role) => {
+    let hasAccess = false
+    user.roles.forEach((role) => {
       if (
         role.warehouse.id == router.query.warehouse_id &&
-        (role.type == 'ADMIN' || role.type == 'EDITOR')
+        (role.roleType == 'ADMIN' || role.roleType == 'EDITOR')
       ) {
-        return true
+        hasAccess = true
       }
     })
-    return false
+    return hasAccess
   }
-  router.query.warehouse_id
   return <AuthContext.Consumer>{(user) => <>{hasRole(user) && children}</>}</AuthContext.Consumer>
 }
