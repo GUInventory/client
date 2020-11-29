@@ -6,7 +6,7 @@ export const Admin = ({ children }) => {
   const router = useRouter()
   const hasRole = (user) => {
     let hasAccess = false
-    user.roles.forEach((role) => {
+    user?.roles?.forEach((role) => {
       if (role.warehouse.id == router.query.warehouse_id && role.roleType == 'ADMIN') {
         hasAccess = true
       }

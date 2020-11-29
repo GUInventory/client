@@ -8,6 +8,7 @@ import { LoadingScreen, Progress, Breadcrumb, ErrorPage } from '@modules/core/co
 import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
 import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
+import { Admin } from '@modules/core/components/role/admin'
 
 export const Warehouse = () => {
   const router = useRouter()
@@ -54,9 +55,23 @@ export const Warehouse = () => {
           <Text>{`${data.warehouse.size.x}x${data.warehouse.size.y}x${data.warehouse.size.z}`}</Text>
         </Box>
         <ButtonGroup size="sm" variant="ghost" isAttached mt={1} mr={2}>
-          <NextLink href={`/warehouse/${data.warehouse.id}/edit`}>
-            <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-          </NextLink>
+          <AdminOrEditor>
+            <NextLink href={`/warehouse/${data.warehouse.id}/edit`}>
+              <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+            </NextLink>
+          </AdminOrEditor>
+          <Admin>
+            <NextLink href={`/warehouse/${data.warehouse.id}/edit_roles`}>
+              <Button
+                size="sm"
+                variant="ghost"
+                colorScheme="blue"
+                leftIcon={<EditIcon size="sm" />}
+              >
+                Edit roles
+              </Button>
+            </NextLink>
+          </Admin>
         </ButtonGroup>
       </Flex>
       {data.warehouse.storages.length === 0 && <EmptyState warehouseId={data.warehouse.id} />}
