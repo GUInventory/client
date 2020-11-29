@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
 import { useUpdateStorageMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
+import { updateSchema } from '../validators'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 type Inputs = {
   name: string
@@ -21,7 +23,9 @@ export const EditStorage = () => {
   const [updateStorageMutation, updateState] = useUpdateStorageMutation()
   const { data, loading, error } = useStorageQuery({ variables: { id: +router.query.storage_id } })
 
-  const { register, handleSubmit, reset } = useForm<Inputs>()
+  const { register, handleSubmit, reset } = useForm<Inputs>({
+    resolver: yupResolver(updateSchema),
+  })
 
   useEffect(() => {
     reset({
