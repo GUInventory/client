@@ -21,6 +21,7 @@ import { useListMyWarehousesQuery } from '@modules/warehouse/graphql/list.genera
 import { useSearchQuery } from '@modules/core/graphql/search.generated'
 import { AuthContext } from '@modules/core/providers/auth_provider'
 import { CreateButton } from './create_button'
+import { GlobalAdmin } from '../role/global_admin'
 
 export const Navigation = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -87,11 +88,11 @@ export const Navigation = () => {
                 {/* <NextLink href="/category">
                   <Link m={4}>Categories</Link>
                 </NextLink>*/}
-                {user?.globalRole == 'ADMIN' && (
+                <GlobalAdmin>
                   <NextLink href="/log">
                     <Link m={4}>Logs</Link>
                   </NextLink>
-                )}
+                </GlobalAdmin>
                 {loading && <Spinner />}
                 {data && (
                   <Menu>
