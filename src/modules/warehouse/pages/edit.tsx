@@ -17,7 +17,7 @@ import { useWarehouseQuery, WarehouseDocument } from '../graphql/find.generated'
 import { useUpdateWarehouseMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { updateSchema } from '../validators'
+import { warehouseSchema } from '../validators'
 
 type Inputs = {
   name: string
@@ -34,7 +34,7 @@ export const EditWarehouse = () => {
   })
 
   const { register, handleSubmit, reset, errors } = useForm<Inputs>({
-    resolver: yupResolver(updateSchema),
+    resolver: yupResolver(warehouseSchema),
   })
 
   useEffect(() => {

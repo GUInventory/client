@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 import { useCreateWarehouseMutation } from '../graphql/create.generated'
 import { ListMyWarehousesDocument } from '../graphql/list.generated'
 import { Breadcrumb } from '@modules/core/components'
-import { createSchema } from '../validators'
+import { warehouseSchema } from '../validators'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 type Inputs = {
@@ -28,7 +28,7 @@ type Inputs = {
 
 export const NewWarehouse = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>({
-    resolver: yupResolver(createSchema),
+    resolver: yupResolver(warehouseSchema),
   })
   const router = useRouter()
   const [createWarehouseMutation, { loading }] = useCreateWarehouseMutation()
