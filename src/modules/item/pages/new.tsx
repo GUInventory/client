@@ -24,7 +24,6 @@ export const NewItem = () => {
   const [createItemMutation, { loading }] = useCreateItemMutation()
 
   const onSubmit = async (inputData) => {
-    console.log(inputData)
     const {
       data: {
         createItem: { id },
