@@ -8,6 +8,8 @@ export type ItemListElementProps = {
   name: string
   image: string
   value: number
+  warehouseId: string
+  storageId: string
 }
 export const ItemListElement = ({ id, name, image, value, warehouseId, storageId }) => (
   <Flex flexDirection="row" align="center" rounded="lg" border="1px" borderColor="gray.200">
