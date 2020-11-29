@@ -166,10 +166,14 @@ export const Navigation = () => {
                     borderBottomColor="gray.200"
                     borderBottomWidth="1px"
                   >
-                    <NextLink href={`/warehouse/storage/item/${item.id}`}>
+                    <NextLink
+                      href={`/warehouse/${item.storage.warehouse.id}/storage/${item.storage.id}/item/${item.id}`}
+                    >
                       <Link>{item.name}</Link>
                     </NextLink>
-                    <NextLink href={`/warehouse/storage/${item.storage.id}`}>
+                    <NextLink
+                      href={`/warehouse/${item.storage.warehouse.id}/storage/${item.storage.id}`}
+                    >
                       <Link>{item.storage.name}</Link>
                     </NextLink>
                     <NextLink href={`/warehouse/${item.storage.warehouse.id}`}>
