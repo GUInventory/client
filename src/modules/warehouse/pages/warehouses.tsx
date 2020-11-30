@@ -5,6 +5,8 @@ import { useListMyWarehousesQuery, ListMyWarehousesDocument } from '../graphql/l
 import { useDeleteWarehouseMutation } from '../graphql/delete.generated'
 import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { AddIcon, ViewIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
+import { GlobalAdmin } from '@modules/core/components/role/global_admin'
 
 export const Warehouses = () => {
   const { data, loading, error } = useListMyWarehousesQuery()
@@ -45,20 +47,21 @@ export const Warehouses = () => {
       {data.myWarehouses.map((warehouse) => (
         <Flex justify="space-between" borderWidth="1px" rounded="lg" p={4} my={2}>
           {warehouse.name}
-
           <ButtonGroup size="sm" isAttached mt={1}>
             <NextLink href={`/warehouse/${warehouse.id}`}>
               <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
             </NextLink>
-            <NextLink href={`/warehouse/${warehouse.id}/edit`}>
-              <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-            </NextLink>
-            <IconButton
-              colorScheme="red"
-              aria-label="Delete"
-              icon={<DeleteIcon />}
-              onClick={() => onDeleteClick(+warehouse.id)}
-            />
+            <GlobalAdmin>
+              <NextLink href={`/warehouse/${warehouse.id}/edit`}>
+                <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+              </NextLink>
+              <IconButton
+                colorScheme="red"
+                aria-label="Delete"
+                icon={<DeleteIcon />}
+                onClick={() => onDeleteClick(+warehouse.id)}
+              />
+            </GlobalAdmin>
           </ButtonGroup>
         </Flex>
       ))}

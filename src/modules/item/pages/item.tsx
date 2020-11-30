@@ -19,6 +19,7 @@ import { LoadingScreen, ErrorPage, Breadcrumb } from '@modules/core/components'
 import { useItemQuery, ItemDocument } from '../graphql/find.generated'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { useDeleteOutgoingMutation } from '../graphql/outgoing/delete.generated'
+import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
 
 export const Item = () => {
   const router = useRouter()
@@ -89,21 +90,23 @@ export const Item = () => {
                   <StatHelpText> {outgoing.createdAt}</StatHelpText>
                 </Box>
 
-                <ButtonGroup size="sm" variant="ghost" isAttached mt={1}>
-                  <NextLink
-                    href={`/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}/item/${data.item.id}/cost/${outgoing.id}/edit`}
-                  >
-                    <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-                  </NextLink>
-                  <IconButton
-                    colorScheme="red"
-                    aria-label="Delete"
-                    icon={<DeleteIcon />}
-                    onClick={() => {
-                      onDeleteClick(+outgoing.id)
-                    }}
-                  />
-                </ButtonGroup>
+                <AdminOrEditor>
+                  <ButtonGroup size="sm" variant="ghost" isAttached mt={1}>
+                    <NextLink
+                      href={`/warehouse/${data.item.storage.warehouse.id}/storage/${data.item.storage.id}/item/${data.item.id}/cost/${outgoing.id}/edit`}
+                    >
+                      <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+                    </NextLink>
+                    <IconButton
+                      colorScheme="red"
+                      aria-label="Delete"
+                      icon={<DeleteIcon />}
+                      onClick={() => {
+                        onDeleteClick(+outgoing.id)
+                      }}
+                    />
+                  </ButtonGroup>
+                </AdminOrEditor>
               </Flex>
             </Stat>
           ))}

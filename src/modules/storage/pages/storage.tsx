@@ -9,6 +9,7 @@ import NextLink from 'next/link'
 import { useDeleteItemMutation } from '@modules/item/graphql/delete.generated'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
 
 export const Storage = () => {
   const router = useRouter()
@@ -78,13 +79,15 @@ export const Storage = () => {
             Size: {`${data.storage.size.x}x${data.storage.size.y}x${data.storage.size.z}`}
           </Text>
         </Box>
-        <ButtonGroup size="sm" variant="ghost" isAttached mt={1} mr={2}>
-          <NextLink
-            href={`/warehouse/${data.storage.warehouse.id}/storage/${data.storage.id}/edit`}
-          >
-            <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-          </NextLink>
-        </ButtonGroup>
+        <AdminOrEditor>
+          <ButtonGroup size="sm" variant="ghost" isAttached mt={1} mr={2}>
+            <NextLink
+              href={`/warehouse/${data.storage.warehouse.id}/storage/${data.storage.id}/edit`}
+            >
+              <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+            </NextLink>
+          </ButtonGroup>
+        </AdminOrEditor>
       </Flex>
       <Flex flexDirection="row">
         <Box flex={1}>
@@ -122,18 +125,20 @@ export const Storage = () => {
                 <Heading size="md" mb={2}>
                   List of Items
                 </Heading>
-                <NextLink
-                  href={`/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/new`}
-                >
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    colorScheme="blue"
-                    leftIcon={<AddIcon size="sm" />}
+                <AdminOrEditor>
+                  <NextLink
+                    href={`/warehouse/${router.query.warehouse_id}/storage/${router.query.storage_id}/item/new`}
                   >
-                    Add item
-                  </Button>
-                </NextLink>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      colorScheme="blue"
+                      leftIcon={<AddIcon size="sm" />}
+                    >
+                      Add item
+                    </Button>
+                  </NextLink>
+                </AdminOrEditor>
               </Flex>
               {data.storage.items.map((item) => (
                 <Flex
@@ -165,17 +170,19 @@ export const Storage = () => {
                         >
                           <IconButton colorScheme="green" aria-label="Show" icon={<ViewIcon />} />
                         </NextLink>
-                        <NextLink
-                          href={`/warehouse/${data.storage.warehouse.id}/storage/${data.storage.id}/item/${item.id}/edit`}
-                        >
-                          <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
-                        </NextLink>
-                        <IconButton
-                          colorScheme="red"
-                          aria-label="Delete"
-                          icon={<DeleteIcon />}
-                          onClick={() => {}}
-                        />
+                        <AdminOrEditor>
+                          <NextLink
+                            href={`/warehouse/${data.storage.warehouse.id}/storage/${data.storage.id}/item/${item.id}/edit`}
+                          >
+                            <IconButton colorScheme="blue" aria-label="Edit" icon={<EditIcon />} />
+                          </NextLink>
+                          <IconButton
+                            colorScheme="red"
+                            aria-label="Delete"
+                            icon={<DeleteIcon />}
+                            onClick={() => {}}
+                          />
+                        </AdminOrEditor>
                       </ButtonGroup>
                     </Flex>
                   </Flex>

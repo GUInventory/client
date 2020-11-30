@@ -1,0 +1,10 @@
+query ListRoles($id: Int!) {
+  roles(id: $id) {
+    id
+    roleType
+    user {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation UpdateRole($id: Int!, $roleType: RoleTypeEnum!) {
+  updateRole(id: $id, data: { roleType: $roleType }) {
+    id
+  }
+}

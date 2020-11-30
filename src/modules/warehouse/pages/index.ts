@@ -1,4 +1,5 @@
 export * from './edit'
 export * from './new'
+export * from './roles'
 export * from './warehouse'
 export * from './warehouses'
