@@ -1,0 +1,5 @@
+mutation CreateRole($userId: Int!, $warehouseId: Int!, $roleType: RoleTypeEnum!) {
+  createRole(data: { user: { id: $userId}, warehouse: {id: $warehouseId} roleType: $roleType }) {
+    id
+  }
+}
