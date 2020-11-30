@@ -87,8 +87,7 @@ export const EditWarehouseRoles = () => {
 
       <Heading>Roles</Heading>
       <Box mb={5}>
-
-      <Box>
+        <Box>
           <Text fontWeight="bold">Admin</Text>Can edit warehouse, storages and items and manage roles
         </Box>
         <Box>
@@ -162,24 +161,16 @@ export const EditWarehouseRoles = () => {
                             make admin
                           </Button>
                         )}
-                      </>
-                    )}
-                  </ButtonGroup>
-                  <ButtonGroup size="sm" isAttached mt={1} flex={1}>
-                    {user.id != role.user.id && (
-                      <>
-                        <Button
-                          colorScheme="blue"
-                          onClick={() => onUpdateClick(+role.id, getRoleType(role.id))}
-                        >
-                          Save
-                        </Button>
-                        <IconButton
-                          colorScheme="red"
-                          aria-label="Delete"
-                          icon={<DeleteIcon />}
-                          onClick={() => onDeleteClick(+role.id)}
-                        />
+                        {user.id != role.user.id && (
+                          <>
+                            <IconButton
+                              colorScheme="red"
+                              aria-label="Delete"
+                              icon={<DeleteIcon />}
+                              onClick={() => onDeleteClick(+role.id)}
+                            />
+                          </>
+                        )}
                       </>
                     )}
                   </ButtonGroup>
