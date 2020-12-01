@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${APP_PORT}:3000'
+    environment:
+      - NODE_ENV=production
+      - GRAPHQL_ENDPOINT=${GRAPHQL_ENDPOINT}
