@@ -10,7 +10,7 @@ import {
   InputRightAddon,
   InputGroup,
 } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useItemQuery, ItemDocument } from '../graphql/find.generated'
@@ -35,6 +35,20 @@ type Inputs = {
 
 export const EditItem = () => {
   const router = useRouter()
+  const [image, setImage] = useState('')
+
+  const onChange = (e) => {
+    let file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (readerEvt) => {
+        let binaryString = readerEvt.target.result
+        // @ts-ignore
+        setImage(btoa(binaryString))
+      }
+      reader.readAsBinaryString(file)
+    }
+  }
   const [updateItemMutation, updateState] = useUpdateItemMutation()
   const { data, loading, error } = useItemQuery({ variables: { id: +router.query.item_id } })
 
@@ -61,7 +75,7 @@ export const EditItem = () => {
       variables: {
         id: +router.query.item_id,
         name: inputData.name,
-        image: inputData.image,
+        ...(image && { image: image }),
         value: +inputData.value,
         positionX: +inputData.positionX,
         positionY: +inputData.positionY,
@@ -117,8 +131,8 @@ export const EditItem = () => {
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!errors.image}>
-          <FormLabel htmlFor="name">Image</FormLabel>
-          <Input name="image" type="text" ref={register} />
+          <FormLabel htmlFor="file">Image</FormLabel>
+          <input name="image" type="file" accept=".jpg, .jpeg, .png" />
           <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
         </FormControl>
 
