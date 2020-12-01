@@ -180,7 +180,9 @@ export const Storage = () => {
                             colorScheme="red"
                             aria-label="Delete"
                             icon={<DeleteIcon />}
-                            onClick={() => {}}
+                            onClick={() => {
+                              onDeleteClick(+item.id)
+                            }}
                           />
                         </AdminOrEditor>
                       </ButtonGroup>

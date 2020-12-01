@@ -22,6 +22,7 @@ import { useDeleteRoleMutation } from '../graphql/delete_role.generated'
 import { useUpdateRoleMutation } from '../graphql/update_role.generated'
 import { useCreateRoleMutation } from '../graphql/create_role.generated'
 import { useListUsersQuery } from '../graphql/list_users.generated'
+import { ListMyWarehousesDocument } from '../graphql/list.generated'
 
 type Inputs = {
   roleType: string
@@ -47,7 +48,10 @@ export const EditWarehouseRoles = () => {
         userId: +inputData.userId,
         warehouseId: +router.query.warehouse_id,
       },
-      refetchQueries: [{ query: ListRolesDocument, variables: { id: +router.query.warehouse_id } }],
+      refetchQueries: [
+        { query: ListMyWarehousesDocument },
+        { query: ListRolesDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
     reset()
   }
@@ -58,14 +62,20 @@ export const EditWarehouseRoles = () => {
   const onDeleteClick = async (id) => {
     await deleteRoleMutation({
       variables: { id },
-      refetchQueries: [{ query: ListRolesDocument, variables: { id: +router.query.warehouse_id } }],
+      refetchQueries: [
+        { query: ListMyWarehousesDocument },
+        { query: ListRolesDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
   }
 
   const onUpdateClick = async (id, roleType) => {
     await updateRoleMutation({
       variables: { id, roleType },
-      refetchQueries: [{ query: ListRolesDocument, variables: { id: +router.query.warehouse_id } }],
+      refetchQueries: [
+        { query: ListMyWarehousesDocument },
+        { query: ListRolesDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
   }
 
@@ -88,7 +98,8 @@ export const EditWarehouseRoles = () => {
       <Heading>Roles</Heading>
       <Box mb={5}>
         <Box>
-          <Text fontWeight="bold">Admin</Text>Can edit warehouse, storages and items and manage roles
+          <Text fontWeight="bold">Admin</Text>Can edit warehouse, storages and items and manage
+          roles
         </Box>
         <Box>
           <Text fontWeight="bold">Editor</Text>Can edit warehouse, storages and items

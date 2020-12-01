@@ -9,6 +9,7 @@ import { EditIcon, DeleteIcon, ViewIcon, AddIcon } from '@chakra-ui/icons'
 import { useDeleteStorageMutation } from '@modules/storage/graphql/delete.generated'
 import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
 import { Admin } from '@modules/core/components/role/admin'
+import { ListMyWarehousesDocument } from '../graphql/list.generated'
 
 export const Warehouse = () => {
   const router = useRouter()
@@ -28,7 +29,10 @@ export const Warehouse = () => {
   const onDeleteClick = async (id) => {
     await deleteStorageMutation({
       variables: { id },
-      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.warehouse_id } }],
+      refetchQueries: [
+        { query: ListMyWarehousesDocument },
+        { query: WarehouseDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
   }
 

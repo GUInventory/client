@@ -18,6 +18,7 @@ import { useUpdateStorageMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { storageSchema } from '../validators'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { WarehouseDocument } from '@modules/warehouse/graphql/find.generated'
 
 type Inputs = {
   name: string
@@ -64,7 +65,10 @@ export const EditStorage = () => {
         sizeY: +inputData.sizeY,
         sizeZ: +inputData.sizeZ,
       },
-      refetchQueries: [{ query: StorageDocument, variables: { id: +router.query.storage_id } }],
+      refetchQueries: [
+        { query: StorageDocument, variables: { id: +router.query.storage_id } },
+        { query: WarehouseDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
 
     router.push(`/warehouse/${router.query.warehouse_id}/storage/${id}`)

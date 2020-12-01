@@ -18,6 +18,7 @@ import { useUpdateItemMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { itemSchema } from '../validators'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { StorageDocument } from '@modules/storage/graphql/find.generated'
 
 type Inputs = {
   name: string
@@ -69,7 +70,10 @@ export const EditItem = () => {
         sizeY: +inputData.sizeY,
         sizeZ: +inputData.sizeZ,
       },
-      refetchQueries: [{ query: ItemDocument, variables: { id: +router.query.item_id } }],
+      refetchQueries: [
+        { query: ItemDocument, variables: { id: +router.query.item_id } },
+        { query: StorageDocument, variables: { id: +router.query.storage_id } },
+      ],
     })
 
     router.push(

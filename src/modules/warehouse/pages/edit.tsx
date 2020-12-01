@@ -59,7 +59,10 @@ export const EditWarehouse = () => {
         sizeZ: +inputData.sizeZ,
         name: inputData.name,
       },
-      refetchQueries: [{ query: WarehouseDocument, variables: { id: +router.query.warehouse_id } }],
+      refetchQueries: [
+        { query: ListMyWarehousesDocument },
+        { query: WarehouseDocument, variables: { id: +router.query.warehouse_id } },
+      ],
     })
 
     router.push(`/warehouse/${id}`)
