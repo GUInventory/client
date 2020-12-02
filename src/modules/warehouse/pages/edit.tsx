@@ -18,6 +18,7 @@ import { useUpdateWarehouseMutation } from '../graphql/update.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { warehouseSchema } from '../validators'
+import { ListMyWarehousesDocument } from '../graphql/list.generated'
 
 type Inputs = {
   name: string
