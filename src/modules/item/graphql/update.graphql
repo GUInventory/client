@@ -9,6 +9,8 @@ mutation UpdateItem(
   $positionX: Int
   $positionY: Int
   $positionZ: Int
+  $moveToWarehouse: Boolean
+  $storage: ConnectRelation
 ) {
   updateItem(
     id: $id
@@ -22,6 +24,8 @@ mutation UpdateItem(
       positionX: $positionX
       positionY: $positionY
       positionZ: $positionZ
+      storage: $storage
+      moveToWarehouse: $moveToWarehouse
     }
   ) {
     id
