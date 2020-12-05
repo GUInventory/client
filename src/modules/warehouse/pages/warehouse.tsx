@@ -1,4 +1,13 @@
-import { Box, Text, Heading, Flex, ButtonGroup, IconButton, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Heading,
+  Flex,
+  ButtonGroup,
+  IconButton,
+  Button,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
@@ -35,6 +44,9 @@ export const Warehouse = () => {
       ],
     })
   }
+  const bg1 = useColorModeValue('gray.50', 'gray.600')
+  const bg2 = useColorModeValue('white', 'gray.800')
+  const color = useColorModeValue('gray.800', 'white')
 
   const calculateHeight = (x, y) => (100 / x) * y
 
@@ -147,7 +159,8 @@ export const Warehouse = () => {
                 key={storage.id}
                 p={4}
                 my={2}
-                bg={activeStorage == storage.id ? 'gray.50' : 'white'}
+                bg={activeStorage == storage.id ? bg1 : bg2}
+                color={color}
                 boxShadow={activeStorage == storage.id ? 'md' : ''}
                 onMouseEnter={() => setActiveStorage(storage.id)}
                 onMouseLeave={() => setActiveStorage('')}

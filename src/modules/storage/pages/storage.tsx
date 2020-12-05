@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
-import { Heading, Text, Flex, Box, Button, ButtonGroup, IconButton, Image } from '@chakra-ui/react'
+import {
+  Heading,
+  Text,
+  Flex,
+  Box,
+  Button,
+  ButtonGroup,
+  IconButton,
+  Image,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import ItemContainer from '../components/item_container/item_container'
 import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
@@ -51,6 +61,9 @@ export const Storage = () => {
     }
   })
 
+  const bg1 = useColorModeValue('gray.50', 'gray.600')
+  const bg2 = useColorModeValue('white', 'gray.800')
+  const color = useColorModeValue('gray.800', 'white')
   const calculateHeight = (x, y) => (100 / x) * y
 
   return (
@@ -146,8 +159,9 @@ export const Storage = () => {
                   borderWidth="1px"
                   key={item.id}
                   my={2}
-                  bg={activeItem == item.id ? 'gray.50' : 'white'}
                   boxShadow={activeItem == item.id ? 'md' : ''}
+                  bg={activeItem == item.id ? bg1 : bg2}
+                  color={color}
                   onMouseEnter={() => setActiveItem(item.id)}
                   onMouseLeave={() => setActiveItem('')}
                   flexDirection="row"
