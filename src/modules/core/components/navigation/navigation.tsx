@@ -14,6 +14,7 @@ import {
   Text,
   SimpleGrid,
   CloseButton,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
@@ -45,6 +46,9 @@ export const Navigation = () => {
     searchFieldRef.current.value = ''
   }
 
+  const bg = useColorModeValue('white', 'gray.800')
+  const color = useColorModeValue('gray.800', 'white')
+
   return (
     <>
       <Flex
@@ -69,11 +73,11 @@ export const Navigation = () => {
             <Input
               type="text"
               w="200px"
-              bg="gray.50"
+              bg={bg}
               placeholder="Search items..."
+              color={color}
               _focus={{
                 w: '80%',
-                bg: 'white',
               }}
               onChange={search}
               ref={searchFieldRef}
@@ -136,7 +140,8 @@ export const Navigation = () => {
           borderBottomWidth="1px"
           position="absolute"
           boxShadow="sm"
-          bg="gray.50"
+          bg={bg}
+          color={color}
         >
           <Box w="100%" maxW={1200} minH="100px" m="0 auto">
             <Flex justify="space-between">
