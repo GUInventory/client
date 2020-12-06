@@ -7,6 +7,9 @@ module.exports = {
     })
     return config
   },
+  env: {
+    GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
+  },
   webpackDevMiddleware: (config) => {
     return config
   },
