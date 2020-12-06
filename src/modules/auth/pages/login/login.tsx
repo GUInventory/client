@@ -17,7 +17,6 @@ export const Login = () => {
   const [login, { loading }] = useLoginMutation()
   const toast = useToast()
   const { setAuthToken } = useAuthToken()
-  const router = useRouter()
 
   const onSubmit = async (inputData) => {
     try {
@@ -25,9 +24,11 @@ export const Login = () => {
         data: {
           login: { token },
         },
-      } = await login({ variables: inputData, refetchQueries: [{ query: MeDocument }] })
+      } = await login({
+        variables: inputData,
+      })
       setAuthToken(token)
-      router.push('/')
+      window.location.href = '/'
     } catch (error) {
       toast({
         title: error.message,

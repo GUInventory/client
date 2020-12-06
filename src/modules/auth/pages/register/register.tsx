@@ -22,16 +22,15 @@ export const Register = () => {
   })
   const [registerMutation] = useRegisterMutation()
   const { setAuthToken } = useAuthToken()
-  const router = useRouter()
 
   const onSubmit = async (inputData) => {
     const {
       data: {
         register: { token },
       },
-    } = await registerMutation({ variables: inputData, refetchQueries: [{ query: MeDocument }] })
+    } = await registerMutation({ variables: inputData })
     setAuthToken(token)
-    router.push('/')
+    window.location.href = '/'
   }
 
   return (
