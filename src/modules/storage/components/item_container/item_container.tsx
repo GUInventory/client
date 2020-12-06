@@ -48,6 +48,7 @@ export const ItemContainer = ({
   const parentRef = useRef(null)
   const warehouseStorageRef = useRef(null)
   const [width, setWidth] = useState(0)
+  const [diff, setDiff] = useState(0)
   const [ratio, setRatio] = useState(0)
   const [warehouseItemsWidthPosition, setWarehouseItemsWidthPosition] = useState([])
   const [updateItemMutation, updateState] = useUpdateItemMutation()
@@ -63,6 +64,10 @@ export const ItemContainer = ({
       if (warehouseStorageRef.current) {
         // Set the width
         setWidth(warehouseStorageRef.current.offsetWidth)
+        setDiff(
+          parentRef.current.getBoundingClientRect().y -
+            warehouseStorageRef.current.getBoundingClientRect().y,
+        )
       }
     }
     // Add event listener to the window
@@ -96,7 +101,8 @@ export const ItemContainer = ({
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ['Item', 'WarehouseItem'],
     drop: async (item: any, monitor) => {
-      const { x, y } = monitor.getDifferenceFromInitialOffset()
+      let { x, y } = monitor.getDifferenceFromInitialOffset()
+      if (item.type == 'WarehouseItem') y = y - diff
       await updateItemMutation({
         variables: {
           id: +item.id,
