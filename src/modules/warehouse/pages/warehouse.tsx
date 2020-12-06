@@ -47,6 +47,8 @@ export const Warehouse = () => {
   const bg1 = useColorModeValue('gray.50', 'gray.600')
   const bg2 = useColorModeValue('white', 'gray.800')
   const color = useColorModeValue('gray.800', 'white')
+  const mapBg = useColorModeValue('gray.200', 'gray.800')
+  const mapBorder = useColorModeValue('gray.400', 'gray.600')
 
   const calculateHeight = (x, y) => (100 / x) * y
 
@@ -102,9 +104,9 @@ export const Warehouse = () => {
               <Box
                 w="100%"
                 pb={`${calculateHeight(data.warehouse.size.x, data.warehouse.size.y)}%`}
-                bg="gray.100"
+                bg={mapBg}
                 borderWidth="2px"
-                borderColor="gray.400"
+                borderColor={mapBorder}
                 position="relative"
               >
                 <Box position="absolute" top="0" left="0" width="100%" height="100%">
