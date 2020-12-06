@@ -77,7 +77,7 @@ export const Item = () => {
           <Text color="gray.400" fontSize="sm">
             Size: {`${data.item.size.x}x${data.item.size.y}x${data.item.size.z}`}
           </Text>
-          <Image src={`data:image/jpeg;base64,${data.item.image}`} />
+          <Image src={data.item.image} />
         </Box>
         <Box flex={1}>
           <Text fontSize="xl">Costs</Text>

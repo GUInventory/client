@@ -132,13 +132,13 @@ export const EditItem = () => {
 
         <FormControl mb={4} isInvalid={!!errors.image}>
           <FormLabel htmlFor="file">Image</FormLabel>
-          <input name="image" type="file" accept=".jpg, .jpeg, .png" />
+          <input name="image" type="file" accept=".jpg, .jpeg" />
           <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!errors.value}>
           <FormLabel htmlFor="value">Value</FormLabel>
-          <Input name="value" type="text" ref={register} />
+          <Input name="value" type="number" ref={register} />
           <FormErrorMessage>{errors.value?.message}</FormErrorMessage>
         </FormControl>
 

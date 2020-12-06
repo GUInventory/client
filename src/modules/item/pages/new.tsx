@@ -117,13 +117,13 @@ export const NewItem = () => {
 
         <FormControl mb={4} isInvalid={!!errors.image}>
           <FormLabel htmlFor="image">Image</FormLabel>
-          <input name="image" type="file" accept=".jpg, .jpeg, .png" onChange={onChange} />
+          <input name="image" type="file" accept=".jpg, .jpeg" onChange={onChange} />
           <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!errors.value}>
           <FormLabel htmlFor="value">Value</FormLabel>
-          <Input name="value" type="text" ref={register} />
+          <Input name="value" type="number" ref={register} />
           <FormErrorMessage>{errors.value?.message}</FormErrorMessage>
         </FormControl>
 

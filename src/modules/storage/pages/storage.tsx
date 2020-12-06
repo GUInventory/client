@@ -162,13 +162,7 @@ export const Storage = () => {
                   rounded="lg"
                   borderColor="gray.200"
                 >
-                  <Image
-                    src={`data:image/jpeg;base64,${item.image}`}
-                    w="48px"
-                    h="48px"
-                    roundedLeft="lg"
-                    mr={4}
-                  />
+                  <Image src={item.image} w="48px" h="48px" roundedLeft="lg" mr={4} />
                   <Flex justify="space-between" w="100%">
                     <Flex align="center">
                       <Text fontWeight="bold">{item.name}</Text>
