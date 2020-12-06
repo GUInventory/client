@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-jest.setTimeout(1000 * 60 * 2)
+jest.setTimeout(1000 * 60 * 1)
 
 describe('authentication', () => {
   it('should deny access to protected routes for unauthenticated request', async () => {
