@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Heading,
   Text,
@@ -42,18 +42,8 @@ export const Storage = () => {
       refetchQueries: [{ query: StorageDocument, variables: { id: +router.query.storage_id } }],
     })
   }
-  let x = 0
-  let y = 0
-  let n = 0
+
   const warehouseItems = data.storage.warehouse.items.map((item) => {
-    if (n % 2 == 0) {
-      x += 32
-    } else {
-      y += 32
-    }
-    n++
-    console.log(x)
-    console.log(y)
     return {
       id: item.id,
       name: item.name,
@@ -61,8 +51,6 @@ export const Storage = () => {
         x: item.position.x,
         y: item.position.y,
       },
-      x,
-      y,
     }
   })
   const items = data.storage.items.map((item) => {
@@ -127,9 +115,6 @@ export const Storage = () => {
         <Box flex={1}>
           <Flex flexDirection={['column', 'column', 'row']} w="100%">
             <Box flex={1} pr={3} pb={3}>
-              <Heading size="md" mb={2}>
-                Content of Storage
-              </Heading>
               <DndProvider backend={HTML5Backend}>
                 <ItemContainer
                   items={items}

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Box, Text, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, Text, Flex, useColorModeValue, Heading } from '@chakra-ui/react'
 import Item from './item'
 import WarehouseItem from './warehouse_item'
 import { useDrop, DropTarget } from 'react-dnd'
@@ -15,8 +15,6 @@ type ItemsContainerProps = {
     id: string
     name: string
     position: { x: number; y: number }
-    x: number
-    y: number
   }[]
   storageSize: { x: number; y: number }
   items: {
@@ -48,7 +46,10 @@ export const ItemContainer = ({
   storageSize,
 }: ItemsContainerProps) => {
   const parentRef = useRef(null)
+  const warehouseStorageRef = useRef(null)
+  const [width, setWidth] = useState(0)
   const [ratio, setRatio] = useState(0)
+  const [warehouseItemsWidthPosition, setWarehouseItemsWidthPosition] = useState([])
   const [updateItemMutation, updateState] = useUpdateItemMutation()
 
   const calculateHeight = (x, y) => (100 / x) * y
@@ -59,6 +60,10 @@ export const ItemContainer = ({
         // Set the ratio
         setRatio(parentWidth / storageSize.x)
       }
+      if (warehouseStorageRef.current) {
+        // Set the width
+        setWidth(warehouseStorageRef.current.offsetWidth)
+      }
     }
     // Add event listener to the window
     window.addEventListener('resize', handleResize)
@@ -67,6 +72,27 @@ export const ItemContainer = ({
     // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  useEffect(() => {
+    const step = 32
+    let x = 0
+    let y = -step
+    setWarehouseItemsWidthPosition(
+      warehouseItems.map((item) => {
+        y += step
+        if (y + step >= width) {
+          y = 0
+          x += step
+        }
+        return {
+          ...item,
+          x,
+          y,
+        }
+      }),
+    )
+  }, [width, warehouseItems])
+
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ['Item', 'WarehouseItem'],
     drop: async (item: any, monitor) => {
@@ -119,10 +145,14 @@ export const ItemContainer = ({
   const mapBorder = useColorModeValue('gray.400', 'gray.600')
   return (
     <>
+      <Heading size="md" mb={2}>
+        Temporary storage
+      </Heading>
       <Box w="100%" p={1}>
         <Box
           w="100%"
           h="200px"
+          ref={warehouseStorageRef}
           borderWidth="2px"
           borderColor={mapBorder}
           bg={stateOfDrop.canDrop ? mapActiveBg : mapBg}
@@ -135,15 +165,20 @@ export const ItemContainer = ({
               height: '100%',
             }}
           >
-            {(!warehouseItems || stateOfDrop.canDrop) && (
+            {(!warehouseItemsWidthPosition || stateOfDrop.canDrop) && (
               <Flex w="100%" h="100%" justify="center" align="center">
                 <Text fontSize="2xl">Drop here to move to another storage</Text>
               </Flex>
             )}
-            {warehouseItems && warehouseItems.map((item) => <WarehouseItem item={item} />)}
+            {warehouseItemsWidthPosition &&
+              warehouseItemsWidthPosition.map((item) => <WarehouseItem item={item} />)}
           </div>
         </Box>
       </Box>
+
+      <Heading size="md" mb={2}>
+        Content of Storage
+      </Heading>
       <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
         <Box
           w="100%"
