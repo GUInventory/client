@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { Card } from '../../components'
 import { useLoginMutation } from '../../graphql/login/login.generated'
 import { useAuthToken } from '../../hooks/use_auth_token'
+import { MeDocument } from '@modules/auth/graphql/me/me.generated'
 
 type Inputs = {
   email: string
@@ -24,7 +25,7 @@ export const Login = () => {
         data: {
           login: { token },
         },
-      } = await login({ variables: inputData })
+      } = await login({ variables: inputData, refetchQueries: [{ query: MeDocument }] })
       setAuthToken(token)
       router.push('/')
     } catch (error) {
