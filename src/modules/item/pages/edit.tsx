@@ -132,7 +132,7 @@ export const EditItem = () => {
 
         <FormControl mb={4} isInvalid={!!errors.image}>
           <FormLabel htmlFor="file">Image</FormLabel>
-          <input name="image" type="file" accept=".jpg, .jpeg" />
+          <input name="image" type="file" accept=".jpg, .jpeg" onChange={onChange} />
           <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
         </FormControl>
 
