@@ -18,6 +18,8 @@ import { useCreateItemMutation } from '../graphql/create.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { itemSchema } from '../validators'
+import { StorageDocument } from '@modules/storage/graphql/find.generated'
+import { ItemDocument } from '../graphql/find.generated'
 
 type Inputs = {
   name: string
@@ -77,6 +79,10 @@ export const NewItem = () => {
       },
     } = await createItemMutation({
       variables,
+      refetchQueries: [
+        { query: ItemDocument, variables: { id: +router.query.item_id } },
+        { query: StorageDocument, variables: { id: +router.query.storage_id } },
+      ],
     })
 
     router.push(
