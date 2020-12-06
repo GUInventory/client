@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Heading,
   Text,
@@ -16,9 +16,9 @@ import { useStorageQuery, StorageDocument } from '../graphql/find.generated'
 import { LoadingScreen, Breadcrumb, ErrorPage } from '@modules/core/components'
 import { AddIcon, ViewIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { useDeleteItemMutation } from '@modules/item/graphql/delete.generated'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDeleteItemMutation } from '@modules/item/graphql/delete.generated'
 import { AdminOrEditor } from '@modules/core/components/role/admin_or_editor'
 
 export const Storage = () => {
@@ -43,6 +43,16 @@ export const Storage = () => {
     })
   }
 
+  const warehouseItems = data.storage.warehouse.items.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      position: {
+        x: item.position.x,
+        y: item.position.y,
+      },
+    }
+  })
   const items = data.storage.items.map((item) => {
     return {
       id: item.id,
@@ -64,7 +74,6 @@ export const Storage = () => {
   const bg1 = useColorModeValue('gray.50', 'gray.600')
   const bg2 = useColorModeValue('white', 'gray.800')
   const color = useColorModeValue('gray.800', 'white')
-  const calculateHeight = (x, y) => (100 / x) * y
 
   return (
     <>
@@ -106,31 +115,15 @@ export const Storage = () => {
         <Box flex={1}>
           <Flex flexDirection={['column', 'column', 'row']} w="100%">
             <Box flex={1} pr={3} pb={3}>
-              <Heading size="md" mb={2}>
-                Content of Storage
-              </Heading>
               <DndProvider backend={HTML5Backend}>
-                <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
-                  <Box
-                    w="100%"
-                    pb={`${calculateHeight(data.storage.size.x, data.storage.size.y)}%`}
-                    bg="gray.100"
-                    borderWidth="2px"
-                    borderColor="gray.400"
-                    position="relative"
-                  >
-                    <Box position="absolute" top="0" left="0" width="100%" height="100%">
-                      <ItemContainer
-                        items={items}
-                        storageId={data.storage.id}
-                        warehouseId={data.storage.warehouse.id}
-                        storageSize={{ x: data.storage.size.x, y: data.storage.size.y }}
-                        setActiveItem={(id) => setActiveItem(id)}
-                        activeItem={activeItem}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
+                <ItemContainer
+                  items={items}
+                  storageId={data.storage.id}
+                  warehouseItems={warehouseItems}
+                  storageSize={{ x: data.storage.size.x, y: data.storage.size.y }}
+                  setActiveItem={(id) => setActiveItem(id)}
+                  activeItem={activeItem}
+                />
               </DndProvider>
             </Box>
             <Box flex={1}>
