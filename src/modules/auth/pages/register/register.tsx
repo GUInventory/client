@@ -7,6 +7,7 @@ import { Card } from '../../components'
 import { useRegisterMutation } from '../../graphql/register/register.generated'
 import { registerSchema } from './register.validation'
 import { useAuthToken } from '../../hooks/use_auth_token'
+import { MeDocument } from '@modules/auth/graphql/me/me.generated'
 
 type Inputs = {
   name: string
@@ -28,7 +29,7 @@ export const Register = () => {
       data: {
         register: { token },
       },
-    } = await registerMutation({ variables: inputData })
+    } = await registerMutation({ variables: inputData, refetchQueries: [{ query: MeDocument }] })
     setAuthToken(token)
     router.push('/')
   }
