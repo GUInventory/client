@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Flex, useColorModeValue } from '@chakra-ui/react'
 import Item from './item'
 import WarehouseItem from './warehouse_item'
 import { useDrop, DropTarget } from 'react-dnd'
@@ -114,28 +114,43 @@ export const ItemContainer = ({
     }),
   })
 
+  const mapBg = useColorModeValue('gray.200', 'gray.800')
+  const mapActiveBg = useColorModeValue('gray.100', 'gray.400')
+  const mapBorder = useColorModeValue('gray.400', 'gray.600')
   return (
     <>
-      <Box w="100%" h="200px" bg="gray.200">
-        <div
-          ref={drop2}
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-          }}
+      <Box w="100%" p={1}>
+        <Box
+          w="100%"
+          h="200px"
+          borderWidth="2px"
+          borderColor={mapBorder}
+          bg={stateOfDrop.canDrop ? mapActiveBg : mapBg}
         >
-          {!warehouseItems && <Text fontSize="2xl">Drop here to move</Text>}
-          {warehouseItems && warehouseItems.map((item) => <WarehouseItem item={item} />)}
-        </div>
+          <div
+            ref={drop2}
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            {(!warehouseItems || stateOfDrop.canDrop) && (
+              <Flex w="100%" h="100%" justify="center" align="center">
+                <Text fontSize="2xl">Drop here to move to another storage</Text>
+              </Flex>
+            )}
+            {warehouseItems && warehouseItems.map((item) => <WarehouseItem item={item} />)}
+          </div>
+        </Box>
       </Box>
       <Box maxW="100%" h="calc(100vh - 16px)" p={1}>
         <Box
           w="100%"
           pb={`${calculateHeight(storageSize.x, storageSize.y)}%`}
-          bg="gray.100"
+          bg={canDrop ? mapActiveBg : mapBg}
           borderWidth="2px"
-          borderColor="gray.400"
+          borderColor={mapBorder}
           position="relative"
         >
           <Box position="absolute" top="0" left="0" width="100%" height="100%">
