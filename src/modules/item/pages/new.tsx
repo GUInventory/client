@@ -10,9 +10,10 @@ import {
   InputRightAddon,
   Box,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import { noImage } from '../utils/image'
 import { useCreateItemMutation } from '../graphql/create.generated'
 import { Breadcrumb } from '@modules/core/components'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -32,30 +33,50 @@ type Inputs = {
 }
 
 export const NewItem = () => {
+  const [image, setImage] = useState('')
+
+  const onChange = (e) => {
+    let file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (readerEvt) => {
+        let binaryString = readerEvt.target.result
+        // @ts-ignore
+        setImage(btoa(binaryString))
+      }
+      reader.readAsBinaryString(file)
+    }
+  }
+
   const { register, handleSubmit, errors } = useForm<Inputs>({
     resolver: yupResolver(itemSchema),
   })
+
+  console.log(errors)
   const router = useRouter()
   const [createItemMutation, { loading }] = useCreateItemMutation()
 
   const onSubmit = async (inputData) => {
+    const variables = {
+      name: inputData.name,
+      ...(image && { image: image }),
+      ...(!image && { image: noImage }),
+      value: +inputData.value,
+      positionX: +inputData.positionX,
+      positionY: +inputData.positionY,
+      positionZ: +inputData.positionY,
+      sizeX: +inputData.sizeX,
+      sizeY: +inputData.sizeY,
+      sizeZ: +inputData.sizeZ,
+      storage: +router.query.storage_id,
+    }
+
     const {
       data: {
         createItem: { id },
       },
     } = await createItemMutation({
-      variables: {
-        name: inputData.name,
-        image: inputData.image,
-        value: +inputData.value,
-        positionX: +inputData.positionX,
-        positionY: +inputData.positionY,
-        positionZ: +inputData.positionY,
-        sizeX: +inputData.sizeX,
-        sizeY: +inputData.sizeY,
-        sizeZ: +inputData.sizeZ,
-        storage: +router.query.storage_id,
-      },
+      variables,
     })
 
     router.push(
@@ -95,14 +116,14 @@ export const NewItem = () => {
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!errors.image}>
-          <FormLabel htmlFor="name">Image</FormLabel>
-          <Input name="image" type="text" ref={register} />
+          <FormLabel htmlFor="image">Image</FormLabel>
+          <input name="image" type="file" accept=".jpg, .jpeg" onChange={onChange} />
           <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
         </FormControl>
 
         <FormControl mb={4} isInvalid={!!errors.value}>
           <FormLabel htmlFor="value">Value</FormLabel>
-          <Input name="value" type="text" ref={register} />
+          <Input name="value" type="number" ref={register} />
           <FormErrorMessage>{errors.value?.message}</FormErrorMessage>
         </FormControl>
 
