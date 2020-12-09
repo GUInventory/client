@@ -13,7 +13,7 @@ export const CreateButton = () => {
       <AdminOrEditor>
         {warehouse_id && storage_id && !item_id && (
           <NextLink href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/new`}>
-            <Button size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
+            <Button id="create" size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
               Add item
             </Button>
           </NextLink>
@@ -21,7 +21,7 @@ export const CreateButton = () => {
 
         {warehouse_id && !storage_id && !item_id && (
           <NextLink href={`/warehouse/${warehouse_id}/storage/new`}>
-            <Button size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
+            <Button id="create" size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
               Add storage
             </Button>
           </NextLink>
@@ -31,7 +31,7 @@ export const CreateButton = () => {
           <NextLink
             href={`/warehouse/${warehouse_id}/storage/${storage_id}/item/${item_id}/cost/new`}
           >
-            <Button size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
+            <Button id="create" size="sm" variant="outline" colorScheme="blue" leftIcon={<AddIcon size="sm" />}>
               Add cost
             </Button>
           </NextLink>

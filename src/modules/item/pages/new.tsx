@@ -80,7 +80,6 @@ export const NewItem = () => {
     } = await createItemMutation({
       variables,
       refetchQueries: [
-        { query: ItemDocument, variables: { id: +router.query.item_id } },
         { query: StorageDocument, variables: { id: +router.query.storage_id } },
       ],
     })
